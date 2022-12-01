@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FolderSize.Properties
+namespace FolderSizeExplorer.Properties
 {
 
 

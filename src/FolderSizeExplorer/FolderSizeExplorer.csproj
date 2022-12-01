@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{254EA525-EB31-428A-B81E-B38C5E7FE8D8}</ProjectGuid>
+    <ProjectGuid>{CAB538B5-D10F-4854-8FDF-3F454ED16A13}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FolderSize</RootNamespace>
-    <AssemblyName>FolderSize</AssemblyName>
+    <RootNamespace>FolderSizeExplorer</RootNamespace>
+    <AssemblyName>FolderSizeExplorer</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

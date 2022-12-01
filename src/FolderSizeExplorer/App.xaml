@@ -1,7 +1,7 @@
-﻿<Application x:Class="FolderSize.App"
+﻿<Application x:Class="FolderSizeExplorer.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:FolderSize"
+             xmlns:local="clr-namespace:FolderSizeExplorer"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

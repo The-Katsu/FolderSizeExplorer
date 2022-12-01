@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderSize", "FolderSize\FolderSize.csproj", "{254EA525-EB31-428A-B81E-B38C5E7FE8D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderSizeExplorer", "FolderSizeExplorer\FolderSizeExplorer.csproj", "{CAB538B5-D10F-4854-8FDF-3F454ED16A13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{254EA525-EB31-428A-B81E-B38C5E7FE8D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{254EA525-EB31-428A-B81E-B38C5E7FE8D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{254EA525-EB31-428A-B81E-B38C5E7FE8D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{254EA525-EB31-428A-B81E-B38C5E7FE8D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB538B5-D10F-4854-8FDF-3F454ED16A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB538B5-D10F-4854-8FDF-3F454ED16A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB538B5-D10F-4854-8FDF-3F454ED16A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB538B5-D10F-4854-8FDF-3F454ED16A13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8FB3AD73-7443-4E6A-8005-17A7F9D04E40}
+		SolutionGuid = {277EE8C3-DCC6-4EA8-A29C-A7EF91FE9231}
 	EndGlobalSection
 EndGlobal
