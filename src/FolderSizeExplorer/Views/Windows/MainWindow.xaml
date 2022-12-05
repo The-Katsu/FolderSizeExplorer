@@ -3,39 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:vm="clr-namespace:FolderSizeExplorer.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1000">
+        Title="Folder Size Explorer"
+        Height="650" Width="1000"
+        MinHeight="150" MinWidth="600">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="0.9*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.31*"></ColumnDefinition>
-            <ColumnDefinition Width="0.69*"></ColumnDefinition>
+            <ColumnDefinition Width="0.31*" MinWidth="150"></ColumnDefinition>
+            <ColumnDefinition Width="0.69*" MinWidth="400"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
        
         <ToolBar Background="#623ed0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Button>
-                <Icon:PackIconMaterial Kind="ArrowLeftCircleOutline" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="ArrowLeftCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             <Button>
-                <Icon:PackIconMaterial Kind="ArrowRightCircleOutline" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="ArrowRightCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             <TextBox Width="150" FontSize="16"></TextBox>
             <Button>
-                <Icon:PackIconMaterial Kind="ArrowUpCircleOutline" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="ArrowUpCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             <Button>
-                <Icon:PackIconMaterial Kind="Refresh" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="Refresh" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             
             <Separator Width="4"></Separator>
 
             <ToggleButton>
-                <Icon:PackIconMaterial Kind="Calculator" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="Calculator" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
                 <ToggleButton.Style>
                     <Style TargetType="{x:Type ToggleButton}">
                         <Setter Property="Background" Value="#623ed0"></Setter>
@@ -48,7 +54,7 @@
                 </ToggleButton.Style>
             </ToggleButton>
             <ToggleButton>
-                <Icon:PackIconMaterial Kind="Folder" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="Folder" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
                 <ToggleButton.Style>
                     <Style TargetType="{x:Type ToggleButton}">
                         <Setter Property="Background" Value="#623ed0"></Setter>
@@ -61,7 +67,7 @@
                 </ToggleButton.Style>
             </ToggleButton>
             <ToggleButton>
-                <Icon:PackIconMaterial Kind="File" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="File" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
                 <ToggleButton.Style>
                     <Style TargetType="{x:Type ToggleButton}">
                         <Setter Property="Background" Value="#623ed0"></Setter>
@@ -95,16 +101,16 @@
             <Separator Width="4"></Separator>
 
             <Button>
-                <Icon:PackIconMaterial Kind="DeleteEmpty" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="DeleteEmpty" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             <Button>
-                <Icon:PackIconMaterial Kind="FileSearchOutline" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="FileSearchOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             <Button>
-                <Icon:PackIconMaterial Kind="FolderEyeOutline" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="FolderEyeOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             <Button>
-                <Icon:PackIconMaterial Kind="FileDelimitedOutline" Foreground="White" Width="30" Height="30"></Icon:PackIconMaterial>
+                <icon:PackIconMaterial Kind="FileDelimitedOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
         </ToolBar>
         
@@ -112,7 +118,7 @@
             <TreeViewItem IsExpanded="True">
                 <TreeViewItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Icon:PackIconMaterial Kind="DesktopTowerMonitor"></Icon:PackIconMaterial>
+                        <icon:PackIconMaterial Kind="DesktopTowerMonitor"></icon:PackIconMaterial>
                         <TextBlock Text=" This PC"></TextBlock>
                     </StackPanel>
                 </TreeViewItem.Header>
@@ -141,6 +147,9 @@
             
         </DataGrid>
         
-        <GridSplitter Grid.Column="0" Grid.Row="1" BorderThickness="3" BorderBrush="Gray"></GridSplitter>
+        <GridSplitter Grid.Column="0" 
+                      Grid.Row="1" 
+                      BorderThickness="3" 
+                      BorderBrush="Gray" />
     </Grid>
 </Window>
