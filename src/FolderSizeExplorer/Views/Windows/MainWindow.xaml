@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:vm="clr-namespace:FolderSizeExplorer.ViewModels"
+        xmlns:cmd="clr-namespace:FolderSizeExplorer.Infrastructure.Commands"
         mc:Ignorable="d"
         Title="Folder Size Explorer"
         Height="650" Width="1000"
@@ -114,25 +115,8 @@
             </Button>
         </ToolBar>
         
-        <TreeView Grid.Column="0" Grid.Row="1">
-            <TreeViewItem IsExpanded="True">
-                <TreeViewItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <icon:PackIconMaterial Kind="DesktopTowerMonitor"></icon:PackIconMaterial>
-                        <TextBlock Text=" This PC"></TextBlock>
-                    </StackPanel>
-                </TreeViewItem.Header>
-                
-                <TreeViewItem Header="Driver C">
-                    <TreeViewItem Header="FolderC1" />
-                    <TreeViewItem Header="FolderC2" />
-                    <TreeViewItem Header="FolderC3" />
-                    <TreeViewItem Header="FolderC4" />
-                </TreeViewItem>
-                <TreeViewItem Header="Driver D">
-                    <TreeViewItem Header="FolderD1" />
-                </TreeViewItem>
-            </TreeViewItem>
+        <TreeView Grid.Column="0" Grid.Row="1" x:Name="TreeView">
+            
         </TreeView>
         
         <DataGrid Grid.Column="1" Grid.Row="1">
