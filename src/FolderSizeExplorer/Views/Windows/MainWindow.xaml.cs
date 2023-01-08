@@ -27,35 +27,82 @@ namespace FolderSizeExplorer
             CreateTreeView();
         }
 
+        private Image LoadImage(string source, int width, int height)
+        {
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(source, UriKind.RelativeOrAbsolute);
+            bitmap.EndInit();
+            return new Image
+            {
+                Source = bitmap,
+                Width = width,
+                Height = height
+            };
+        }
+
+        private StackPanel MakeHeader(Image image, TextBlock textBlock)
+        {
+            var stackPanel = new StackPanel { Orientation = Orientation.Horizontal };
+            stackPanel.Children.Add(image);
+            stackPanel.Children.Add(textBlock);
+            return stackPanel;
+        }
+        
         private void CreateTreeView()
         {
-            var pcHeaderStackPanel = new StackPanel { Orientation = Orientation.Horizontal };
-            var computerBitmapImage = new BitmapImage();
-            computerBitmapImage.BeginInit();
-            computerBitmapImage.UriSource = new Uri(@"/Resources/Icons/computer.png", UriKind.RelativeOrAbsolute);
-            computerBitmapImage.EndInit();
-            var computerImage = new Image {Source = computerBitmapImage, Width = 18, Height = 18};
-            var computerText = new TextBlock {Text = "This PC", Margin = new Thickness(10, 0, 0, 0)};
-            pcHeaderStackPanel.Children.Add(computerImage);
-            pcHeaderStackPanel.Children.Add(computerText);
+            var computerImage = LoadImage(@"/Resources/Icons/TreeView/computer.png",18,18);
+            var computerText = new TextBlock {Text = "This PC", Margin = new Thickness(5, 0, 0, 0)};
+            var pcHeader = MakeHeader(computerImage, computerText);
             
-            var pcTreeViewItem = new TreeViewItem {Header = pcHeaderStackPanel, IsExpanded = true};
+            var pcTreeViewItem = new TreeViewItem {Header = pcHeader, IsExpanded = true};
 
             var drivers = DriveInfo.GetDrives();
 
+            var desktopImage = LoadImage(@"/Resources/Icons/TreeView/desktop.png",18,18);
+            var desktopText = new TextBlock {Text = "Desktop", Margin = new Thickness(5, 0, 0, 0)};
+            var desktopHeader = MakeHeader(desktopImage, desktopText);
+            var desktopTreeViewItem = new TreeViewItem{Header = desktopHeader};
+            
+            var documentsImage = LoadImage(@"/Resources/Icons/TreeView/documents.png",18,18);
+            var documentsText = new TextBlock {Text = "Documents", Margin = new Thickness(5, 0, 0, 0)};
+            var documentsHeader = MakeHeader(documentsImage, documentsText);
+            var documentsTreeViewItem = new TreeViewItem{Header = documentsHeader};
+            
+            var downloadImage = LoadImage(@"/Resources/Icons/TreeView/downloads.png",18,18);
+            var downloadsText = new TextBlock {Text = "Downloads", Margin = new Thickness(5, 0, 0, 0)};
+            var downloadsHeader = MakeHeader(downloadImage, downloadsText);
+            var downloadsTreeViewItem = new TreeViewItem{Header = downloadsHeader};
+
+            var picturesImage = LoadImage(@"/Resources/Icons/TreeView/pictures.png",18,18);
+            var picturesText = new TextBlock {Text = "Pictures", Margin = new Thickness(5, 0, 0, 0)};
+            var picturesHeader = MakeHeader(picturesImage, picturesText);
+            var picturesTreeViewItem = new TreeViewItem{Header = picturesHeader};
+
+            var videosImage = LoadImage(@"/Resources/Icons/TreeView/video.png",18,18);
+            var videosText = new TextBlock {Text = "Videos", Margin = new Thickness(5, 0, 0, 0)};
+            var videosHeader = MakeHeader(videosImage, videosText);
+            var videosTreeViewItem = new TreeViewItem{Header = videosHeader};
+            
+            var musicImage = LoadImage(@"/Resources/Icons/TreeView/music.png",18,18);
+            var musicText = new TextBlock {Text = "Music", Margin = new Thickness(5, 0, 0, 0)};
+            var musicHeader = MakeHeader(musicImage, musicText);
+            var musicTreeViewItem = new TreeViewItem{Header = musicHeader};
+
+            pcTreeViewItem.Items.Add(desktopTreeViewItem);
+            pcTreeViewItem.Items.Add(documentsTreeViewItem);
+            pcTreeViewItem.Items.Add(downloadsTreeViewItem);
+            pcTreeViewItem.Items.Add(picturesTreeViewItem);
+            pcTreeViewItem.Items.Add(videosTreeViewItem);
+            pcTreeViewItem.Items.Add(musicTreeViewItem);
+            
             foreach (var driver in drivers)
             {
-                var driverStackPanel = new StackPanel { Orientation = Orientation.Horizontal };
-                var driverBitmapImage = new BitmapImage();
-                driverBitmapImage.BeginInit();
-                driverBitmapImage.UriSource = new Uri(@"/Resources/Icons/driver.png", UriKind.RelativeOrAbsolute);
-                driverBitmapImage.EndInit();
-                var driverImage = new Image {Source = driverBitmapImage, Width = 18, Height = 18};
-                var driverName = new TextBlock {Text = driver.Name, Margin = new Thickness(10, 0, 0, 0)};
-                driverStackPanel.Children.Add(driverImage);
-                driverStackPanel.Children.Add(driverName);
+                var driverImage = LoadImage(@"/Resources/Icons/TreeView/driver.png", 18, 18);
+                var driverText = new TextBlock {Text = driver.Name, Margin = new Thickness(5, 0, 0, 0)};
+                var driverHeader = MakeHeader(driverImage, driverText);
                 
-                var driverTreeViewItem = new TreeViewItem { Header = driverStackPanel };
+                var driverTreeViewItem = new TreeViewItem { Header = driverHeader };
                 pcTreeViewItem.Items.Add(driverTreeViewItem);
             }
 

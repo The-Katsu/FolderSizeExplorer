@@ -6,7 +6,6 @@ namespace FolderSizeExplorer.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
-        private List<string> _folder;
         
     }
 }

@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\Icons\exe.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Icons\Executable\exe.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
@@ -115,19 +115,19 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\exe.ico" />
+    <Resource Include="Resources\Icons\Executable\exe.ico" />
+    <Resource Include="Resources\Icons\TreeView\computer.png" />
+    <Resource Include="Resources\Icons\TreeView\driver.png" />
+    <Resource Include="Resources\Icons\TreeView\file.png" />
+    <Resource Include="Resources\Icons\TreeView\folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\folder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\file.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\driver.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\computer.png" />
+    <Resource Include="Resources\Icons\TreeView\desktop.png" />
+    <Resource Include="Resources\Icons\TreeView\documents.png" />
+    <Resource Include="Resources\Icons\TreeView\downloads.png" />
+    <Resource Include="Resources\Icons\TreeView\music.png" />
+    <Resource Include="Resources\Icons\TreeView\pictures.png" />
+    <Resource Include="Resources\Icons\TreeView\video.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
