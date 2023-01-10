@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:vm="clr-namespace:FolderSizeExplorer.ViewModels"
+        xmlns:model="clr-namespace:FolderSizeExplorer.Models"
         xmlns:cmd="clr-namespace:FolderSizeExplorer.Infrastructure.Commands"
         mc:Ignorable="d"
         Title="Folder Size Explorer"
@@ -115,8 +116,14 @@
             </Button>
         </ToolBar>
         
-        <TreeView Grid.Column="0" Grid.Row="1" x:Name="TreeView">
-            
+        <TreeView Grid.Column="0" Grid.Row="1" 
+                  x:Name="TreeView" 
+                  ItemsSource="{Binding Folders}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Subfolders}">
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
         </TreeView>
         
         <DataGrid Grid.Column="1" Grid.Row="1">
