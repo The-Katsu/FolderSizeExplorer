@@ -119,18 +119,19 @@
         <TreeView Grid.Column="0" Grid.Row="1" 
                   x:Name="TreeView" 
                   ItemsSource="{Binding Folders}">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Subfolders}">
-                    <TreeViewItem IsExpanded="True">
-                        <TreeViewItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Width="18" Height="18" Source="{Binding Image}"></Image>
-                                <TextBlock Margin="5,0,0,0" Text="{Binding Name}"></TextBlock>
-                            </StackPanel>
-                        </TreeViewItem.Header>
-                    </TreeViewItem>
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type model:Folder}" ItemsSource="{Binding Subfolders}">
+                    <StackPanel Orientation="Horizontal" >
+                        <Image Width="18" Height="18" Source="{Binding Image}"></Image>
+                        <TextBlock Margin="3,0,0,0" Text="{Binding Name}"></TextBlock>
+                    </StackPanel>
                 </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
+            </TreeView.Resources>
         </TreeView>
         
         <DataGrid Grid.Column="1" Grid.Row="1">
