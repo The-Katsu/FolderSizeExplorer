@@ -1,0 +1,155 @@
+﻿<Window x:Class="FolderSizeExplorer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:vm="clr-namespace:FolderSizeExplorer.ViewModels"
+        xmlns:model="clr-namespace:FolderSizeExplorer.Models"
+        xmlns:cmd="clr-namespace:FolderSizeExplorer.Infrastructure.Commands"
+        mc:Ignorable="d"
+        Title="Folder Size Explorer"
+        Height="650" Width="1000"
+        MinHeight="150" MinWidth="600">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="0.9*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*" MinWidth="150"></ColumnDefinition>
+            <ColumnDefinition Width="0.63*" MinWidth="400"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+       
+        <ToolBar Background="#623ed0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button>
+                <icon:PackIconMaterial Kind="ArrowLeftCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+            </Button>
+            <Button>
+                <icon:PackIconMaterial Kind="ArrowRightCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+            </Button>
+            <TextBox IsReadOnly="True" Text="{Binding CurrentDirectory}" Width="300" FontSize="12"></TextBox>
+            <Button>
+                <icon:PackIconMaterial Kind="ArrowUpCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+            </Button>
+            <Button>
+                <icon:PackIconMaterial Kind="Refresh" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+            </Button>
+            
+            <Separator Width="4"></Separator>
+
+            <ToggleButton>
+                <icon:PackIconMaterial Kind="Calculator" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+                <ToggleButton.Style>
+                    <Style TargetType="{x:Type ToggleButton}">
+                        <Setter Property="Background" Value="#623ed0"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Background" Value="Gray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+            <ToggleButton>
+                <icon:PackIconMaterial Kind="Folder" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+                <ToggleButton.Style>
+                    <Style TargetType="{x:Type ToggleButton}">
+                        <Setter Property="Background" Value="#623ed0"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Background" Value="Gray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+            <ToggleButton>
+                <icon:PackIconMaterial Kind="File" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+                <ToggleButton.Style>
+                    <Style TargetType="{x:Type ToggleButton}">
+                        <Setter Property="Background" Value="#623ed0"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Background" Value="Gray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+
+            <Separator Width="4"></Separator>
+
+            <RadioButton Foreground="White" FontSize="20">
+                B
+            </RadioButton>
+            <RadioButton Foreground="White" FontSize="20">
+                KB
+            </RadioButton>
+            <RadioButton Foreground="White" FontSize="20">
+                MB
+            </RadioButton>
+            <RadioButton Foreground="White" FontSize="20">
+                GB
+            </RadioButton>
+            <RadioButton Foreground="White" FontSize="20">
+                TB
+            </RadioButton>
+
+            <Separator Width="4"></Separator>
+
+            <Button>
+                <icon:PackIconMaterial Kind="DeleteEmpty" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+            </Button>
+            <Button>
+                <icon:PackIconMaterial Kind="FileSearchOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+            </Button>
+            <Button>
+                <icon:PackIconMaterial Kind="FolderEyeOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+            </Button>
+            <Button>
+                <icon:PackIconMaterial Kind="FileDelimitedOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
+            </Button>
+        </ToolBar>
+        
+        <TreeView Grid.Column="0" Grid.Row="1" 
+                  x:Name="TreeView" 
+                  ItemsSource="{Binding Folders}">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}"/>
+                    <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type model:Folder}" ItemsSource="{Binding Subfolders}">
+                    <StackPanel Orientation="Horizontal" >
+                        <Image Width="18" Height="18" Source="{Binding Image}"></Image>
+                        <TextBlock Margin="3,0,0,0" Text="{Binding Name}"></TextBlock>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+        
+        <DataGrid Grid.Column="1" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Size" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Files" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Folders" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date Modified" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                <DataGridTextColumn Header="Type" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+            </DataGrid.Columns>
+            
+        </DataGrid>
+        
+        <GridSplitter Grid.Column="0" 
+                      Grid.Row="1" 
+                      BorderThickness="2" 
+                      BorderBrush="#623ed0" />
+    </Grid>
+</Window>

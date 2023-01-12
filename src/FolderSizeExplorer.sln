@@ -5,6 +5,12 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderSizeExplorer", "FolderSizeExplorer\FolderSizeExplorer.csproj", "{CAB538B5-D10F-4854-8FDF-3F454ED16A13}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{DC4D0971-726E-4C8D-AE62-C7EEDEDACBDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderSizeExplorer.Test.Console", "Test\FolderSizeExplorer.Test.Console\FolderSizeExplorer.Test.Console.csproj", "{12C9E4E4-19F3-474E-A108-D23E1A194405}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderSizeExplorer.Test.UI", "Test\FolderSizeExplorer.Test.UI\FolderSizeExplorer.Test.UI.csproj", "{78BF5BFB-7C1C-4C11-9D90-1A2429419F8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +21,21 @@ Global
 		{CAB538B5-D10F-4854-8FDF-3F454ED16A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAB538B5-D10F-4854-8FDF-3F454ED16A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAB538B5-D10F-4854-8FDF-3F454ED16A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C9E4E4-19F3-474E-A108-D23E1A194405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C9E4E4-19F3-474E-A108-D23E1A194405}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C9E4E4-19F3-474E-A108-D23E1A194405}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C9E4E4-19F3-474E-A108-D23E1A194405}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78BF5BFB-7C1C-4C11-9D90-1A2429419F8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BF5BFB-7C1C-4C11-9D90-1A2429419F8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78BF5BFB-7C1C-4C11-9D90-1A2429419F8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78BF5BFB-7C1C-4C11-9D90-1A2429419F8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12C9E4E4-19F3-474E-A108-D23E1A194405} = {DC4D0971-726E-4C8D-AE62-C7EEDEDACBDD}
+		{78BF5BFB-7C1C-4C11-9D90-1A2429419F8D} = {DC4D0971-726E-4C8D-AE62-C7EEDEDACBDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {277EE8C3-DCC6-4EA8-A29C-A7EF91FE9231}
