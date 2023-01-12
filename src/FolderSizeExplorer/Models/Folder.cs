@@ -26,14 +26,24 @@ namespace FolderSizeExplorer.Models
             set
             {
                 _isExpanded = value;
-                // Exclude This PC
-                if (_isExpanded && Path != "")
+                switch (_isExpanded)
                 {
-                    Subfolders.Clear();
-                    foreach (var subfolder in FolderService.GetSubfolders(Path)) 
-                        Subfolders.Add(subfolder);
+                    // This PC case
+                    case true when Path == "":
+                    {
+                        Subfolders.Clear();
+                        foreach (var subfolder in FolderService.GetThisPcSubfolders()) 
+                            Subfolders.Add(subfolder);
+                        break;
+                    }
+                    case true when Path != "":
+                    {
+                        Subfolders.Clear();
+                        foreach (var subfolder in FolderService.GetSubfolders(Path)) 
+                            Subfolders.Add(subfolder);
+                        break;
+                    }
                 }
-                
             }
         }
         private bool _isSelected;

@@ -8,16 +8,9 @@ namespace FolderSizeExplorer.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        #region Fields
         public ObservableCollection<Folder> Folders { get; }
         private string _currentDirectory = string.Empty;
-        private void OnDirectoryChanged(object sender, ValueChangedEvent<string> e)
-        {
-            if (e.NewValue != _currentDirectory)
-            {
-                _currentDirectory = e.NewValue;
-                OnPropertyChanged(nameof(CurrentDirectory));
-            }
-        }
         public string CurrentDirectory
         {
             get => _currentDirectory;
@@ -30,7 +23,21 @@ namespace FolderSizeExplorer.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region Methods
+
+        private void OnDirectoryChanged(object sender, ValueChangedEvent<string> e)
+        {
+            if (e.NewValue != _currentDirectory)
+            {
+                _currentDirectory = e.NewValue;
+                OnPropertyChanged(nameof(CurrentDirectory));
+            }
+        }
+
+        #endregion
+        
         public MainWindowViewModel()
         {
             Folder.SelectedPathChanged += OnDirectoryChanged;

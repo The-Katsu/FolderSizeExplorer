@@ -19,16 +19,27 @@ namespace FolderSizeExplorer.Services
         /// <returns>Collection of specific folders and drivers</returns>
         public static ObservableCollection<Folder> Base()
         {
-            var folders = new ObservableCollection<Folder>();
-
-            var thisPc = new Folder
+            return new ObservableCollection<Folder>
             {
-                Image = "/Resources/Icons/TreeView/computer.png",
-                Name = "This PC",
-                Path = "",
-                IsExpanded = true
+                new Folder
+                {
+                    Image = "/Resources/Icons/TreeView/computer.png",
+                    Name = "This PC",
+                    Path = "",
+                    IsExpanded = true,
+                    Subfolders = GetThisPcSubfolders()
+                }
             };
-
+        }
+        public static ObservableCollection<Folder> GetThisPcSubfolders()
+        {
+            var thisPcSubfolders = GetSpecialFolders();
+            foreach (var driver in GetDrivers()) 
+                thisPcSubfolders.Add(driver);
+            return thisPcSubfolders;
+        }
+        private static ObservableCollection<Folder> GetSpecialFolders()
+        {
             var documents = new Folder
             {
                 Image = "/Resources/Icons/TreeView/documents.png",
@@ -70,8 +81,8 @@ namespace FolderSizeExplorer.Services
                 Name = KnownFolders.Videos.CanonicalName,
                 Path = KnownFolders.Videos.Path
             };
-
-            var specialFolders = new ObservableCollection<Folder>
+            
+            return new ObservableCollection<Folder>
             {
                 desktop,
                 downloads,
@@ -80,10 +91,11 @@ namespace FolderSizeExplorer.Services
                 music,
                 videos
             };
-
-            thisPc.Subfolders = specialFolders;
-            
+        }
+        private static ObservableCollection<Folder> GetDrivers()
+        {
             var drivers = DriveInfo.GetDrives();
+            var driverFolders = new ObservableCollection<Folder>();
             foreach (var driver in drivers)
             {
                 var d = new Folder
@@ -92,13 +104,11 @@ namespace FolderSizeExplorer.Services
                     Name = driver.Name,
                     Path = driver.RootDirectory.Name
                 };
-                thisPc.Subfolders.Add(d);
+                driverFolders.Add(d);
             }
-            
-            folders.Add(thisPc);
-            return folders;
+            return driverFolders;
         }
-
+        
         public static ObservableCollection<Folder> GetSubfolders(string source)
         {
             var subfolders = new ObservableCollection<Folder>();
