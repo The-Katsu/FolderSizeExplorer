@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using FolderSizeExplorer.Events;
 using FolderSizeExplorer.Services;
 
 namespace FolderSizeExplorer.Models
@@ -34,7 +36,18 @@ namespace FolderSizeExplorer.Models
                 
             }
         }
-
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                OnSelectedPathChanged(Path);
+            }
+        }
         public ObservableCollection<Folder> Subfolders { get; set; }
+        public static event EventHandler<ValueChangedEvent<string>> SelectedPathChanged; 
+        private void OnSelectedPathChanged(string path) => SelectedPathChanged?.Invoke(this, new ValueChangedEvent<string>(path));
     }
 }

@@ -20,8 +20,8 @@
             <RowDefinition Height="0.9*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.31*" MinWidth="150"></ColumnDefinition>
-            <ColumnDefinition Width="0.69*" MinWidth="400"></ColumnDefinition>
+            <ColumnDefinition Width="0.4*" MinWidth="150"></ColumnDefinition>
+            <ColumnDefinition Width="0.63*" MinWidth="400"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
        
@@ -32,7 +32,7 @@
             <Button>
                 <icon:PackIconMaterial Kind="ArrowRightCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
-            <TextBox Width="150" FontSize="16"></TextBox>
+            <TextBox IsReadOnly="True" Text="{Binding CurrentDirectory}" Width="300" FontSize="12"></TextBox>
             <Button>
                 <icon:PackIconMaterial Kind="ArrowUpCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
@@ -122,6 +122,7 @@
             <TreeView.ItemContainerStyle>
                 <Style TargetType="TreeViewItem">
                     <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}"/>
+                    <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}"/>
                 </Style>
             </TreeView.ItemContainerStyle>
             <TreeView.Resources>
@@ -148,7 +149,7 @@
         
         <GridSplitter Grid.Column="0" 
                       Grid.Row="1" 
-                      BorderThickness="3" 
-                      BorderBrush="Gray" />
+                      BorderThickness="2" 
+                      BorderBrush="#623ed0" />
     </Grid>
 </Window>
