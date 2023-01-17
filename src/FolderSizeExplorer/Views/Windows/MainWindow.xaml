@@ -158,12 +158,30 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate>
-                                            <DataGrid>
+                                            <DataGrid ItemsSource="{Binding Path=SpecialFileDetailsCollection, Mode=TwoWay}" AutoGenerateColumns="False"
+                                                      GridLinesVisibility="Horizontal"
+                                                      SelectionUnit="FullRow"
+                                                      SelectedItem="{Binding Path=SpecialFileDetailsCollection/IsSelected, Mode=TwoWay}"
+                                                      ScrollViewer.CanContentScroll="True" 
+                                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                                      Height="{Binding RelativeSource={RelativeSource FindAncestor,
+                           AncestorType={x:Type Grid}},
+                           Path=RowDefinitions[1].ActualHeight}">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Name" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Total Size" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Free Space" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Type" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="auto">
+                                                        <DataGridTemplateColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel Orientation="Horizontal" >
+                                                                    <Image Width="18" Height="18" Source="{Binding IconSource}"></Image>
+                                                                    <TextBlock Margin="3,0,0,0" Text="{Binding Name}"></TextBlock>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </DataGridTemplateColumn.CellTemplate>
+                                                    </DataGridTemplateColumn>
+                                                    <DataGridTextColumn Header="Total Size" Binding="{Binding TotalSpace}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Free Space" Binding="{Binding FreeSpace}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </ControlTemplate>
@@ -174,15 +192,31 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate>
-                                            <DataGrid>
+                                            <DataGrid ItemsSource="{Binding FileDetailsCollection}" AutoGenerateColumns="False"
+                                                      GridLinesVisibility="Horizontal" SelectionMode="Extended"
+                                                      ScrollViewer.CanContentScroll="True" 
+                                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                                      Height="{Binding RelativeSource={RelativeSource FindAncestor,
+                           AncestorType={x:Type Grid}},
+                           Path=RowDefinitions[1].ActualHeight}">
                                                 <DataGrid.Columns>
-                                                    <DataGridTextColumn Header="Name" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Size" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Files" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Folders" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Date Modified" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Date Created" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Type" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="auto" MaxWidth="200">
+                                                        <DataGridTemplateColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <StackPanel Orientation="Horizontal" >
+                                                                    <Image Width="18" Height="18" Source="{Binding IconSource}"></Image>
+                                                                    <TextBlock Margin="3,0,0,0" Text="{Binding Name}"></TextBlock>
+                                                                </StackPanel>
+                                                            </DataTemplate>
+                                                        </DataGridTemplateColumn.CellTemplate>
+                                                    </DataGridTemplateColumn>
+                                                    <DataGridTextColumn Header="Size" Binding="{Binding Size}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Files" Binding="{Binding FilesCount}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Folders" Binding="{Binding FoldersCount}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Date Modified" Binding="{Binding ModifiedAt}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Date Created" Binding="{Binding CreatedAt}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Type" Binding="{Binding FileExtension}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </ControlTemplate>

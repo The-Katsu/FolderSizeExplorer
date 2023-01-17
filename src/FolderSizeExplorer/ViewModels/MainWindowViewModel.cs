@@ -10,8 +10,12 @@ namespace FolderSizeExplorer.ViewModels
     {
         #region Fields
         public ObservableCollection<Folder> Folders { get; }
-        public ObservableCollection<FileDetails> FileDetailsCollection { get; set; }
-        public ObservableCollection<SpecialFileDetails> SpecialFileDetailsCollection { get; set; }
+
+        public ObservableCollection<FileDetails> FileDetailsCollection { get; set; } =
+            new ObservableCollection<FileDetails>();
+        public ObservableCollection<SpecialFileDetails> SpecialFileDetailsCollection { get; set; } = 
+            new ObservableCollection<SpecialFileDetails>();
+        
         private string _currentDirectory = string.Empty;
         public string CurrentDirectory
         {
@@ -21,6 +25,10 @@ namespace FolderSizeExplorer.ViewModels
                 if (value != _currentDirectory)
                 {
                     _currentDirectory = value;
+                    if (_currentDirectory == string.Empty) 
+                        SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
+                    else
+                        FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory);
                     OnPropertyChanged();
                 }
             }
@@ -55,7 +63,8 @@ namespace FolderSizeExplorer.ViewModels
         public MainWindowViewModel()
         {
             Folder.SelectedPathChanged += OnDirectoryChanged;
-            Folders = FolderService.Base();
+            Folders = TreeViewService.GetBase();
+            SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
         }
     }
 }

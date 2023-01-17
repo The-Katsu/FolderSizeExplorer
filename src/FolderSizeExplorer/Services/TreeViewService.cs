@@ -6,7 +6,7 @@ using Microsoft.WindowsAPICodePack.Shell;
 
 namespace FolderSizeExplorer.Services
 {
-    internal static class FolderService
+    internal static class TreeViewService
     {
         /// <summary>
         /// Create collection for base tree view like
@@ -17,7 +17,7 @@ namespace FolderSizeExplorer.Services
         /// etc.
         /// </summary>
         /// <returns>Collection of specific folders and drivers</returns>
-        public static ObservableCollection<Folder> Base()
+        public static ObservableCollection<Folder> GetBase()
         {
             return new ObservableCollection<Folder>
             {
@@ -107,26 +107,6 @@ namespace FolderSizeExplorer.Services
                 driverFolders.Add(d);
             }
             return driverFolders;
-        }
-        public static ObservableCollection<Folder> GetSubfolders(string source)
-        {
-            var subfolders = new ObservableCollection<Folder>();
-
-            var paths = Directory.GetDirectories(source, "*", SearchOption.TopDirectoryOnly);
-
-            foreach (var path in paths)
-            {
-                var directory = new DirectoryInfo(path);
-                var folder = new Folder
-                {
-                    Name = directory.Name,
-                    IconSource = "/Resources/Icons/Special/folder.png",
-                    Path = directory.FullName
-                };
-                subfolders.Add(folder);
-            }
-            
-            return subfolders;
         }
     }
 }
