@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using FolderSizeExplorer.Events;
+using FolderSizeExplorer.Models.Base;
 using FolderSizeExplorer.Services;
 
 namespace FolderSizeExplorer.Models
@@ -8,17 +9,13 @@ namespace FolderSizeExplorer.Models
     /// <summary>
     /// Tree View Item
     /// </summary>
-    internal class Folder
+    internal class Folder : File
     {
         public Folder()
         {
             Subfolders = new ObservableCollection<Folder> {null};
         }
-        
-        public string Name { get; set; }
-        public string Image { get; set; }
-        public string Path { get; set; }
-        
+
         private bool _isExpanded;
         public bool IsExpanded
         {
@@ -46,8 +43,9 @@ namespace FolderSizeExplorer.Models
                 }
             }
         }
+        
         private bool _isSelected;
-        public bool IsSelected
+        public override bool IsSelected
         {
             get => _isSelected;
             set

@@ -10,6 +10,8 @@ namespace FolderSizeExplorer.ViewModels
     {
         #region Fields
         public ObservableCollection<Folder> Folders { get; }
+        public ObservableCollection<FileDetails> FileDetailsCollection { get; set; }
+        public ObservableCollection<SpecialFileDetails> SpecialFileDetailsCollection { get; set; }
         private string _currentDirectory = string.Empty;
         public string CurrentDirectory
         {
@@ -23,17 +25,29 @@ namespace FolderSizeExplorer.ViewModels
                 }
             }
         }
+
+        private bool _isStartupPage = true;
+        public bool IsStartupPage
+        {
+            get => _isStartupPage;
+            set
+            {
+                if (value != _isStartupPage)
+                {
+                    _isStartupPage = value;
+                    OnPropertyChanged();
+                }   
+            }
+        }
+
         #endregion
 
         #region Methods
 
         private void OnDirectoryChanged(object sender, ValueChangedEvent<string> e)
         {
-            if (e.NewValue != _currentDirectory)
-            {
-                _currentDirectory = e.NewValue;
-                OnPropertyChanged(nameof(CurrentDirectory));
-            }
+            CurrentDirectory = e.NewValue;
+            IsStartupPage = _currentDirectory == string.Empty;
         }
 
         #endregion

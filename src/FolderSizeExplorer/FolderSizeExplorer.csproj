@@ -82,8 +82,10 @@
     </Compile>
     <Compile Include="Events\ValueChangedEvent.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
-    <Compile Include="Models\FileDetailsModel.cs" />
+    <Compile Include="Models\Base\File.cs" />
+    <Compile Include="Models\FileDetails.cs" />
     <Compile Include="Models\Folder.cs" />
+    <Compile Include="Models\SpecialFileDetails.cs" />
     <Compile Include="Services\FolderService.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -126,18 +128,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Executable\exe.ico" />
-    <Resource Include="Resources\Icons\TreeView\computer.png" />
-    <Resource Include="Resources\Icons\TreeView\driver.png" />
-    <Resource Include="Resources\Icons\TreeView\file.png" />
-    <Resource Include="Resources\Icons\TreeView\folder.png" />
+    <Resource Include="Resources\Icons\Special\computer.png" />
+    <Resource Include="Resources\Icons\Special\driver.png" />
+    <Resource Include="Resources\Icons\Special\file.png" />
+    <Resource Include="Resources\Icons\Special\folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\TreeView\desktop.png" />
-    <Resource Include="Resources\Icons\TreeView\documents.png" />
-    <Resource Include="Resources\Icons\TreeView\downloads.png" />
-    <Resource Include="Resources\Icons\TreeView\music.png" />
-    <Resource Include="Resources\Icons\TreeView\pictures.png" />
-    <Resource Include="Resources\Icons\TreeView\video.png" />
+    <Resource Include="Resources\Icons\Special\desktop.png" />
+    <Resource Include="Resources\Icons\Special\documents.png" />
+    <Resource Include="Resources\Icons\Special\downloads.png" />
+    <Resource Include="Resources\Icons\Special\music.png" />
+    <Resource Include="Resources\Icons\Special\pictures.png" />
+    <Resource Include="Resources\Icons\Special\video.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

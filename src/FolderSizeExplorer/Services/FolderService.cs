@@ -23,7 +23,7 @@ namespace FolderSizeExplorer.Services
             {
                 new Folder
                 {
-                    Image = "/Resources/Icons/TreeView/computer.png",
+                    IconSource = "/Resources/Icons/Special/computer.png",
                     Name = "This PC",
                     Path = "",
                     IsExpanded = true,
@@ -42,42 +42,42 @@ namespace FolderSizeExplorer.Services
         {
             var documents = new Folder
             {
-                Image = "/Resources/Icons/TreeView/documents.png",
+                IconSource = "/Resources/Icons/Special/documents.png",
                 Name = KnownFolders.Documents.CanonicalName,
                 Path = KnownFolders.Documents.Path
             };
 
             var downloads = new Folder
             {
-                Image = "/Resources/Icons/TreeView/downloads.png",
+                IconSource = "/Resources/Icons/Special/downloads.png",
                 Name = KnownFolders.Downloads.CanonicalName,
                 Path = KnownFolders.Downloads.Path
             };
 
             var desktop = new Folder
             {
-                Image = "/Resources/Icons/TreeView/desktop.png",
+                IconSource = "/Resources/Icons/Special/desktop.png",
                 Name = KnownFolders.Desktop.CanonicalName,
                 Path = KnownFolders.Desktop.Path
             };
 
             var music = new Folder
             {
-                Image = "/Resources/Icons/TreeView/music.png",
+                IconSource = "/Resources/Icons/Special/music.png",
                 Name = KnownFolders.Music.CanonicalName,
                 Path = KnownFolders.Music.Path
             };
 
             var pictures = new Folder
             {
-                Image = "/Resources/Icons/TreeView/pictures.png",
+                IconSource = "/Resources/Icons/Special/pictures.png",
                 Name = KnownFolders.Pictures.CanonicalName,
                 Path = KnownFolders.Pictures.Path
             };
             
             var videos = new Folder
             {
-                Image = "/Resources/Icons/TreeView/video.png",
+                IconSource = "/Resources/Icons/Special/video.png",
                 Name = KnownFolders.Videos.CanonicalName,
                 Path = KnownFolders.Videos.Path
             };
@@ -100,7 +100,7 @@ namespace FolderSizeExplorer.Services
             {
                 var d = new Folder
                 {
-                    Image = "/Resources/Icons/TreeView/driver.png",
+                    IconSource = "/Resources/Icons/Special/driver.png",
                     Name = driver.Name,
                     Path = driver.RootDirectory.Name
                 };
@@ -108,7 +108,6 @@ namespace FolderSizeExplorer.Services
             }
             return driverFolders;
         }
-        
         public static ObservableCollection<Folder> GetSubfolders(string source)
         {
             var subfolders = new ObservableCollection<Folder>();
@@ -121,7 +120,7 @@ namespace FolderSizeExplorer.Services
                 var folder = new Folder
                 {
                     Name = directory.Name,
-                    Image = "/Resources/Icons/TreeView/folder.png",
+                    IconSource = "/Resources/Icons/Special/folder.png",
                     Path = directory.FullName
                 };
                 subfolders.Add(folder);

@@ -24,6 +24,12 @@
             <ColumnDefinition Width="0.63*" MinWidth="400"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
+        <GridSplitter Grid.Column="0" 
+                      Grid.Row="1" 
+                      BorderThickness="2" 
+                      BorderBrush="#623ed0" />
+        
+        <!--#region Toolbar -->
        
         <ToolBar Background="#623ed0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Button>
@@ -116,6 +122,10 @@
             </Button>
         </ToolBar>
         
+        <!--#endregion -->
+        
+        <!--#region PC Folders Tree -->
+        
         <TreeView Grid.Column="0" Grid.Row="1" 
                   x:Name="TreeView" 
                   ItemsSource="{Binding Folders}">
@@ -128,28 +138,65 @@
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type model:Folder}" ItemsSource="{Binding Subfolders}">
                     <StackPanel Orientation="Horizontal" >
-                        <Image Width="18" Height="18" Source="{Binding Image}"></Image>
+                        <Image Width="18" Height="18" Source="{Binding IconSource}"></Image>
                         <TextBlock Margin="3,0,0,0" Text="{Binding Name}"></TextBlock>
                     </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
         </TreeView>
         
-        <DataGrid Grid.Column="1" Grid.Row="1">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Size" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Files" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Folders" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Date Modified" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                <DataGridTextColumn Header="Type" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-            </DataGrid.Columns>
-            
-        </DataGrid>
+        <!--#endregion -->
         
-        <GridSplitter Grid.Column="0" 
-                      Grid.Row="1" 
-                      BorderThickness="2" 
-                      BorderBrush="#623ed0" />
+        <!--#region Files Explorer -->
+        
+        <StackPanel Height="Auto" Width="Auto" Grid.Column="1" Grid.Row="1">
+            <ContentControl>
+                <ContentControl.Style>
+                    <Style TargetType="{x:Type ContentControl}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsStartupPage}" Value="True">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <DataGrid>
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Name" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Total Size" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Free Space" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Type" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=IsStartupPage}" Value="False">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <DataGrid>
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Name" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Size" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Files" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Folders" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Date Modified" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Date Created" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Type" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+        </StackPanel>
+        
+        
+        
+        <!--#endregion -->
     </Grid>
 </Window>
