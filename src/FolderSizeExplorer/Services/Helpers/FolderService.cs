@@ -45,9 +45,9 @@ namespace FolderSizeExplorer.Services.Helpers
             }
             catch (Exception e)
             {
-                size = 0;
+                // ignored
             }
-            
+
             return size; 
         }
     }

@@ -69,6 +69,7 @@ namespace FolderSizeExplorer.ViewModels
         public MainWindowViewModel()
         {
             Folder.SelectedPathChanged += OnDirectoryChanged;
+            ExplorerDoubleClickCommand.SelectedPathChanged += OnDirectoryChanged;
             Folders = TreeViewService.GetBase();
             SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
         }

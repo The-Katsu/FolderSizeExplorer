@@ -179,8 +179,7 @@
                                                     <MouseBinding 
                                                         Gesture="LeftDoubleClick"
                                                         Command="{StaticResource ExplorerDoubleClickCommand}"
-                                                        CommandParameter="{Binding ElementName=SpecialFilesExplorer, Path=SelectedItem}"
-                                                        ></MouseBinding>
+                                                        CommandParameter="{Binding ElementName=SpecialFilesExplorer, Path=SelectedItem}" />
                                                 </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
                                                     <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="auto">
@@ -206,16 +205,26 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate>
-                                            <DataGrid ItemsSource="{Binding FileDetailsCollection}" AutoGenerateColumns="False"
-                                                      GridLinesVisibility="Horizontal" SelectionMode="Extended"
-                                                      ScrollViewer.CanContentScroll="True" 
-                                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                                                      SelectionUnit="FullRow"
-                                                      Height="{Binding RelativeSource={RelativeSource FindAncestor,
+                                            <DataGrid 
+                                                x:Name="SpecialFilesExplorer"
+                                                ItemsSource="{Binding Path=FileDetailsCollection, Mode=TwoWay}" AutoGenerateColumns="False"
+                                                GridLinesVisibility="Horizontal"
+                                                SelectionUnit="FullRow"
+                                                SelectedItem="{Binding Path=FileDetailsCollection/IsSelected, Mode=TwoWay}"
+                                                ScrollViewer.CanContentScroll="True" 
+                                                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                                SelectionMode="Extended"
+                                                Height="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                AncestorType={x:Type Grid}},
                                                                Path=RowDefinitions[1].ActualHeight}"
-                                                      >
+                                            >
+                                                <DataGrid.InputBindings>
+                                                    <MouseBinding 
+                                                        Gesture="LeftDoubleClick"
+                                                        Command="{StaticResource ExplorerDoubleClickCommand}"
+                                                        CommandParameter="{Binding ElementName=SpecialFilesExplorer, Path=SelectedItem}" />
+                                                </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
                                                     <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="auto" MaxWidth="200">
                                                         <DataGridTemplateColumn.CellTemplate>

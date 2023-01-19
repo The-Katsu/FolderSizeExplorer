@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using FolderSizeExplorer.Events;
 using FolderSizeExplorer.Infrastructure.Commands.Base;
+using FolderSizeExplorer.Models.Base;
 
 namespace FolderSizeExplorer.Infrastructure.Commands
 {
@@ -7,9 +10,9 @@ namespace FolderSizeExplorer.Infrastructure.Commands
     {
         public override bool CanExecute(object parameter) => true;
 
-        public override void Execute(object parameter)
-        {
-            Application.Current.Shutdown();
-        }
+        public override void Execute(object parameter) => 
+            SelectedPathChanged?.Invoke(this, new ValueChangedEvent<string>((parameter as File).Path));
+        
+        public static event EventHandler<ValueChangedEvent<string>> SelectedPathChanged;
     }
 }
