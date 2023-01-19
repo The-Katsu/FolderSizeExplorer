@@ -32,7 +32,8 @@ namespace FolderSizeExplorer.Services
                 Name = KnownFolders.Documents.CanonicalName,
                 Path = KnownFolders.Documents.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Documents.Path)
+                TotalSpace = FolderService.CalculateSize(KnownFolders.Documents.Path),
+                IsDirectory = true
             };
 
             var downloads = new SpecialFileDetails
@@ -41,7 +42,8 @@ namespace FolderSizeExplorer.Services
                 Name = KnownFolders.Downloads.CanonicalName,
                 Path = KnownFolders.Downloads.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Downloads.Path)
+                TotalSpace = FolderService.CalculateSize(KnownFolders.Downloads.Path),
+                IsDirectory = true
             };
 
             var desktop = new SpecialFileDetails
@@ -50,7 +52,8 @@ namespace FolderSizeExplorer.Services
                 Name = KnownFolders.Desktop.CanonicalName,
                 Path = KnownFolders.Desktop.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Desktop.Path)
+                TotalSpace = FolderService.CalculateSize(KnownFolders.Desktop.Path),
+                IsDirectory = true
             };
 
             var music = new SpecialFileDetails
@@ -59,7 +62,8 @@ namespace FolderSizeExplorer.Services
                 Name = KnownFolders.Music.CanonicalName,
                 Path = KnownFolders.Music.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Music.Path)
+                TotalSpace = FolderService.CalculateSize(KnownFolders.Music.Path),
+                IsDirectory = true
             };
 
             var pictures = new SpecialFileDetails
@@ -68,7 +72,8 @@ namespace FolderSizeExplorer.Services
                 Name = KnownFolders.Pictures.CanonicalName,
                 Path = KnownFolders.Pictures.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Pictures.Path)
+                TotalSpace = FolderService.CalculateSize(KnownFolders.Pictures.Path),
+                IsDirectory = true
             };
             
             var videos = new SpecialFileDetails
@@ -77,7 +82,8 @@ namespace FolderSizeExplorer.Services
                 Name = KnownFolders.Videos.CanonicalName,
                 Path = KnownFolders.Videos.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Videos.Path)
+                TotalSpace = FolderService.CalculateSize(KnownFolders.Videos.Path),
+                IsDirectory = true
             };
 
             return new List<SpecialFileDetails>
@@ -104,7 +110,8 @@ namespace FolderSizeExplorer.Services
                     Path = driver.RootDirectory.Name,
                     TotalSpace = driver.TotalSize,
                     FreeSpace = driver.TotalFreeSpace,
-                    Type = "Driver"
+                    Type = "Driver",
+                    IsDirectory = true
                 };
                 driverFiles.Add(d);
             }

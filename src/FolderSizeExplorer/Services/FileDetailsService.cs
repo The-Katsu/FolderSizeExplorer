@@ -21,7 +21,9 @@ namespace FolderSizeExplorer.Services
                     IconSource = "/Resources/Icons/Special/folder.png",
                     Name = directory.Name,
                     Path = directory.FullName,
-                    Size = FolderService.CalculateSize(directory.FullName)
+                    Size = FolderService.CalculateSize(directory.FullName),
+                    Type = directory.Extension,
+                    IsDirectory = true
                 };
                 fileDetailsCollection.Add(dir);
             }
@@ -34,8 +36,8 @@ namespace FolderSizeExplorer.Services
                     Name = file.Name,
                     Path = file.FullName,
                     Size = file.Length,
-                    FileExtension = file.Extension
-
+                    Type = file.Extension,
+                    IsDirectory = false
                 };
                 fileDetailsCollection.Add(f);
             }

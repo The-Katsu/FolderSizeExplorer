@@ -55,6 +55,8 @@ namespace FolderSizeExplorer.Models
                 OnSelectedPathChanged(Path);
             }
         }
+
+        public override bool IsDirectory => true;
         public ObservableCollection<Folder> Subfolders { get; set; }
         public static event EventHandler<ValueChangedEvent<string>> SelectedPathChanged; 
         private void OnSelectedPathChanged(string path) => SelectedPathChanged?.Invoke(this, new ValueChangedEvent<string>(path));

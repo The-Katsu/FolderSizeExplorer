@@ -16,6 +16,7 @@
     </Window.DataContext>
     <Window.Resources>
         <cmd:ExplorerDoubleClickCommand x:Key="ExplorerDoubleClickCommand"></cmd:ExplorerDoubleClickCommand>
+        <cmd:ChangeDirectoryCommand x:Key="ChangeDirectoryCommand"></cmd:ChangeDirectoryCommand>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -35,14 +36,23 @@
         <!--#region Toolbar -->
        
         <ToolBar Background="#623ed0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <Button>
+            <Button
+                x:Name="HistoryPreviousButton"
+                Command="{StaticResource ChangeDirectoryCommand}"
+                CommandParameter="{Binding ElementName=HistoryPreviousButton}">
                 <icon:PackIconMaterial Kind="ArrowLeftCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
-            <Button>
+            <Button
+                x:Name="HistoryNextButton"
+                Command="{StaticResource ChangeDirectoryCommand}"
+                CommandParameter="{Binding ElementName=HistoryNextButton}">
                 <icon:PackIconMaterial Kind="ArrowRightCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             <TextBox IsReadOnly="True" Text="{Binding CurrentDirectory}" Width="300" FontSize="12"></TextBox>
-            <Button>
+            <Button 
+                    x:Name="HistoryUpButton"
+                    Command="{StaticResource ChangeDirectoryCommand}"
+                    CommandParameter="{Binding ElementName=HistoryUpButton}">
                 <icon:PackIconMaterial Kind="ArrowUpCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             <Button>
@@ -241,7 +251,7 @@
                                                     <DataGridTextColumn Header="Folders" Binding="{Binding FoldersCount}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                     <DataGridTextColumn Header="Date Modified" Binding="{Binding ModifiedAt}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                     <DataGridTextColumn Header="Date Created" Binding="{Binding CreatedAt}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Type" Binding="{Binding FileExtension}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                 </DataGrid.Columns>
                                             </DataGrid>
                                         </ControlTemplate>
