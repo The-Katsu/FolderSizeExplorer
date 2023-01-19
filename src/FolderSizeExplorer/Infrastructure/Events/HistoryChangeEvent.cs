@@ -2,7 +2,7 @@
 
 namespace FolderSizeExplorer.Infrastructure.Events
 {
-    internal class HistoryChangeEvent<T> : EventArgs
+    internal class HistoryChangeEvent : EventArgs
     {
         public HistoryChangeEvent(bool previous, bool next, bool up)
         {

@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-using System.Windows.Media;
-using FolderSizeExplorer.Models.Base;
+﻿using FolderSizeExplorer.Models.Base;
 
 namespace FolderSizeExplorer.Models
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using FolderSizeExplorer.Events;
+using FolderSizeExplorer.Infrastructure.Events;
 using FolderSizeExplorer.Models.Base;
 using FolderSizeExplorer.Services;
 using FolderSizeExplorer.Services.Helpers;

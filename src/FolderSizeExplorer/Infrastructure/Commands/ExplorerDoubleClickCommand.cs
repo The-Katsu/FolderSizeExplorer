@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Windows;
-using FolderSizeExplorer.Events;
 using FolderSizeExplorer.Infrastructure.Commands.Base;
-using FolderSizeExplorer.Models;
+using FolderSizeExplorer.Infrastructure.Events;
 using FolderSizeExplorer.Models.Base;
 
 namespace FolderSizeExplorer.Infrastructure.Commands

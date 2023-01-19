@@ -1,13 +1,9 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace FolderSizeExplorer
+﻿namespace FolderSizeExplorer.Views.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {

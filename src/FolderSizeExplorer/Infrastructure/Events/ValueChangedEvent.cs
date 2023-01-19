@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FolderSizeExplorer.Events
+namespace FolderSizeExplorer.Infrastructure.Events
 {
     public class ValueChangedEvent<T> : EventArgs
     {

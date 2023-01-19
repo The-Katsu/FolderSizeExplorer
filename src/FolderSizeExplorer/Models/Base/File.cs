@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace FolderSizeExplorer.Models.Base
+﻿namespace FolderSizeExplorer.Models.Base
 {
     internal abstract class File
     {

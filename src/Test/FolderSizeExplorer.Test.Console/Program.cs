@@ -13,6 +13,7 @@ namespace FolderSizeExplorer.Test.Console
     {
         static void Main(string[] args)
         {
+            var files = new DirectoryInfo("C:\\").GetFiles("*.*", SearchOption.AllDirectories);
             var w = new System.Diagnostics.Stopwatch();
             
             w.Start();

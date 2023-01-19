@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Controls;
-using FolderSizeExplorer.Events;
 using FolderSizeExplorer.Infrastructure.Commands.Base;
 using FolderSizeExplorer.Infrastructure.Events;
 
@@ -16,17 +15,17 @@ namespace FolderSizeExplorer.Infrastructure.Commands
             switch (btn.Name)
             {
                 case "HistoryPreviousButton":
-                    HistoryChangedEvent?.Invoke(this, new HistoryChangeEvent<string>(true, false, false));
+                    HistoryChangedEvent?.Invoke(this, new HistoryChangeEvent(true, false, false));
                     break;
                 case "HistoryNextButton":
-                    HistoryChangedEvent?.Invoke(this, new HistoryChangeEvent<string>(false, true, false));
+                    HistoryChangedEvent?.Invoke(this, new HistoryChangeEvent(false, true, false));
                     break;
                 case "HistoryUpButton":
-                    HistoryChangedEvent?.Invoke(this, new HistoryChangeEvent<string>(false, false, true));
+                    HistoryChangedEvent?.Invoke(this, new HistoryChangeEvent(false, false, true));
                     break;
             }
         }
         
-        public static event EventHandler<HistoryChangeEvent<string>> HistoryChangedEvent;
+        public static event EventHandler<HistoryChangeEvent> HistoryChangedEvent;
     }
 }

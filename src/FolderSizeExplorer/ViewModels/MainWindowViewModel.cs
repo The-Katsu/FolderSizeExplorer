@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using FolderSizeExplorer.Events;
 using FolderSizeExplorer.Infrastructure.Commands;
 using FolderSizeExplorer.Infrastructure.Events;
 using FolderSizeExplorer.Models;
@@ -15,13 +13,25 @@ namespace FolderSizeExplorer.ViewModels
     {
         #region Fields
 
+        #region History
+
         private LinkedList<string> _history;
         private LinkedListNode<string> _currentHistoryNode;
+
+        #endregion
+
+        #region Collections
+
         public ObservableCollection<Folder> Folders { get; }
         public ObservableCollection<FileDetails> FileDetailsCollection { get; set; } =
             new ObservableCollection<FileDetails>();
         public ObservableCollection<SpecialFileDetails> SpecialFileDetailsCollection { get; set; } = 
             new ObservableCollection<SpecialFileDetails>();
+
+        #endregion
+        
+        #region Properties
+
         private string _currentDirectory = string.Empty;
         public string CurrentDirectory
         {
@@ -39,6 +49,7 @@ namespace FolderSizeExplorer.ViewModels
                         SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
                     else
                         FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory);
+                    
                     OnPropertyChanged();
                 }
             }
@@ -57,10 +68,14 @@ namespace FolderSizeExplorer.ViewModels
                 }   
             }
         }
-
+        
+        #endregion
+        
         #endregion
 
         #region Methods
+
+        #region EventsCathcer
 
         private void OnDirectoryChanged(object sender, ValueChangedEvent<string> e)
         {
@@ -68,13 +83,13 @@ namespace FolderSizeExplorer.ViewModels
             _currentHistoryNode = _history.Last;
         }
 
-        private void OnHistoryChanged(object sender, HistoryChangeEvent<string> e)
+        private void OnHistoryChanged(object sender, HistoryChangeEvent e)
         {
             if (e.Previous)
             {
                 for (var node = _history.First; node != null; node = node.Next)
                 {
-                    if (node == _currentHistoryNode)
+                    if (node == _currentHistoryNode && node.Previous != null)
                     {
                         _currentHistoryNode = node.Previous;
                         CurrentDirectory = _currentHistoryNode?.Value;
@@ -87,7 +102,7 @@ namespace FolderSizeExplorer.ViewModels
             {
                 for (var node = _history.First; node != null; node = node.Next)
                 {
-                    if (node == _currentHistoryNode)
+                    if (node == _currentHistoryNode && node.Next != null)
                     {
                         _currentHistoryNode = node.Next;
                         CurrentDirectory = _currentHistoryNode?.Value;
@@ -98,17 +113,22 @@ namespace FolderSizeExplorer.ViewModels
 
             if (e.Up)
             {
-                CurrentDirectory = new DirectoryInfo(_currentDirectory).Parent?.FullName;
-                _currentHistoryNode = _history.Last;
+                if (_currentDirectory != string.Empty)
+                {
+                    var directoryInfo = new DirectoryInfo(_currentDirectory).Parent;
+                    if (directoryInfo != null)
+                    {
+                        CurrentDirectory = directoryInfo.FullName;
+                        _currentHistoryNode = _history.Last;
+                    }
+                }
             }
         }
-        
-        #endregion
-
-        #region Commands
 
         #endregion
         
+        #endregion
+
         public MainWindowViewModel()
         {
             Folder.SelectedPathChanged += OnDirectoryChanged;
