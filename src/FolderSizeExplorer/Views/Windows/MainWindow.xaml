@@ -14,6 +14,9 @@
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <cmd:ExplorerDoubleClickCommand x:Key="ExplorerDoubleClickCommand"></cmd:ExplorerDoubleClickCommand>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -158,16 +161,27 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate>
-                                            <DataGrid ItemsSource="{Binding Path=SpecialFileDetailsCollection, Mode=TwoWay}" AutoGenerateColumns="False"
+                                            <DataGrid 
+                                                x:Name="SpecialFilesExplorer"
+                                                ItemsSource="{Binding Path=SpecialFileDetailsCollection, Mode=TwoWay}" AutoGenerateColumns="False"
                                                       GridLinesVisibility="Horizontal"
                                                       SelectionUnit="FullRow"
                                                       SelectedItem="{Binding Path=SpecialFileDetailsCollection/IsSelected, Mode=TwoWay}"
                                                       ScrollViewer.CanContentScroll="True" 
                                                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                                                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                                      SelectionMode="Extended"
                                                       Height="{Binding RelativeSource={RelativeSource FindAncestor,
-                           AncestorType={x:Type Grid}},
-                           Path=RowDefinitions[1].ActualHeight}">
+                                                               AncestorType={x:Type Grid}},
+                                                               Path=RowDefinitions[1].ActualHeight}"
+                                                      >
+                                                <DataGrid.InputBindings>
+                                                    <MouseBinding 
+                                                        Gesture="LeftDoubleClick"
+                                                        Command="{StaticResource ExplorerDoubleClickCommand}"
+                                                        CommandParameter="{Binding ElementName=SpecialFilesExplorer, Path=SelectedItem}"
+                                                        ></MouseBinding>
+                                                </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
                                                     <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="auto">
                                                         <DataGridTemplateColumn.CellTemplate>
@@ -197,9 +211,11 @@
                                                       ScrollViewer.CanContentScroll="True" 
                                                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                                                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                                      SelectionUnit="FullRow"
                                                       Height="{Binding RelativeSource={RelativeSource FindAncestor,
-                           AncestorType={x:Type Grid}},
-                           Path=RowDefinitions[1].ActualHeight}">
+                                                               AncestorType={x:Type Grid}},
+                                                               Path=RowDefinitions[1].ActualHeight}"
+                                                      >
                                                 <DataGrid.Columns>
                                                     <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="auto" MaxWidth="200">
                                                         <DataGridTemplateColumn.CellTemplate>

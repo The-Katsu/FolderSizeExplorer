@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using FolderSizeExplorer.Models;
 
 namespace FolderSizeExplorer.Services.Helpers
@@ -35,17 +37,11 @@ namespace FolderSizeExplorer.Services.Helpers
             
             try
             {
-                var fis = folder.GetFiles();
-                foreach (var fi in fis) 
-                {      
-                    size += fi.Length;    
-                }
-            
-                var dis = folder.GetDirectories();
-                foreach (var di in dis) 
-                {
-                    size += CalculateSize(di.FullName);   
-                }
+                foreach (var fi in folder.GetFiles()) 
+                    Interlocked.Add(ref size, fi.Length);
+
+                Parallel.ForEach(folder.GetDirectories(), (subfolder) =>
+                    Interlocked.Add(ref size, CalculateSize(subfolder.FullName)));
             }
             catch (Exception e)
             {

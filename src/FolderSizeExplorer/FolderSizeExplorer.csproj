@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="Events\ValueChangedEvent.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
+    <Compile Include="Infrastructure\Commands\ExplorerDoubleClickCommand.cs" />
     <Compile Include="Models\Base\File.cs" />
     <Compile Include="Models\FileDetails.cs" />
     <Compile Include="Models\Folder.cs" />

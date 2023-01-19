@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using FolderSizeExplorer.Events;
+using FolderSizeExplorer.Infrastructure.Commands;
 using FolderSizeExplorer.Models;
 using FolderSizeExplorer.Services;
 using FolderSizeExplorer.ViewModels.Base;
@@ -57,6 +59,10 @@ namespace FolderSizeExplorer.ViewModels
             CurrentDirectory = e.NewValue;
             IsStartupPage = _currentDirectory == string.Empty;
         }
+
+        #endregion
+
+        #region Commands
 
         #endregion
         
