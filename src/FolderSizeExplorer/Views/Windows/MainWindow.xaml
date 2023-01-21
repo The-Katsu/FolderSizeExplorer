@@ -17,6 +17,7 @@
     <Window.Resources>
         <cmd:ExplorerDoubleClickCommand x:Key="ExplorerDoubleClickCommand"></cmd:ExplorerDoubleClickCommand>
         <cmd:ChangeDirectoryCommand x:Key="ChangeDirectoryCommand"></cmd:ChangeDirectoryCommand>
+        <cmd:UpdateExplorerCommand x:Key="UpdateExplorerCommand"></cmd:UpdateExplorerCommand>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -55,7 +56,8 @@
                     CommandParameter="{Binding ElementName=HistoryUpButton}">
                 <icon:PackIconMaterial Kind="ArrowUpCircleOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
-            <Button>
+            <Button
+                Command="{StaticResource UpdateExplorerCommand}">
                 <icon:PackIconMaterial Kind="Refresh" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             

@@ -77,6 +77,15 @@ namespace FolderSizeExplorer.ViewModels
 
         #region EventsCathcer
 
+        private void OnExplorerUpdate(object sender, UpdateExplorerEvent e)
+        {
+            if (_currentDirectory == string.Empty) 
+                SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
+            else
+                FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory);
+
+        }
+        
         private void OnDirectoryChanged(object sender, ValueChangedEvent<string> e)
         {
             CurrentDirectory = e.NewValue;
@@ -134,6 +143,7 @@ namespace FolderSizeExplorer.ViewModels
             Folder.SelectedPathChanged += OnDirectoryChanged;
             ExplorerDoubleClickCommand.SelectedPathChanged += OnDirectoryChanged;
             ChangeDirectoryCommand.HistoryChangedEvent += OnHistoryChanged;
+            UpdateExplorerCommand.UpdateExplorerEvent += OnExplorerUpdate;
             Folders = TreeViewService.GetBase();
             SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
             _history = new LinkedList<string>(new [] {_currentDirectory});
