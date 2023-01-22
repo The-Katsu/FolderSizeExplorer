@@ -82,6 +82,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
+    <Compile Include="Infrastructure\Commands\EmptyRecycleBinCommand.cs" />
     <Compile Include="Infrastructure\Commands\ExplorerDoubleClickCommand.cs" />
     <Compile Include="Infrastructure\Commands\ChangeDirectoryCommand.cs" />
     <Compile Include="Infrastructure\Commands\UpdateExplorerCommand.cs" />
@@ -92,10 +93,11 @@
     <Compile Include="Models\FileDetails.cs" />
     <Compile Include="Models\Folder.cs" />
     <Compile Include="Models\SpecialFileDetails.cs" />
-    <Compile Include="Services\FileDetailsService.cs" />
+    <Compile Include="Services\Helpers\BinService.cs" />
     <Compile Include="Services\Helpers\FolderService.cs" />
-    <Compile Include="Services\TreeViewService.cs" />
-    <Compile Include="Services\SpecialFileDetailsService.cs" />
+    <Compile Include="Services\UI\FileDetailsService.cs" />
+    <Compile Include="Services\UI\SpecialFileDetailsService.cs" />
+    <Compile Include="Services\UI\TreeViewService.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\Windows\MainWindow.xaml.cs">

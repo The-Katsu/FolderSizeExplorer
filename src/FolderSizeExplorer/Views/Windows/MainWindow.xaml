@@ -18,6 +18,7 @@
         <cmd:ExplorerDoubleClickCommand x:Key="ExplorerDoubleClickCommand"></cmd:ExplorerDoubleClickCommand>
         <cmd:ChangeDirectoryCommand x:Key="ChangeDirectoryCommand"></cmd:ChangeDirectoryCommand>
         <cmd:UpdateExplorerCommand x:Key="UpdateExplorerCommand"></cmd:UpdateExplorerCommand>
+        <cmd:EmptyRecycleBinCommand x:Key="EmptyRecycleBinCommand"></cmd:EmptyRecycleBinCommand>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -123,7 +124,8 @@
 
             <Separator Width="4"></Separator>
 
-            <Button>
+            <Button
+                Command="{StaticResource EmptyRecycleBinCommand}">
                 <icon:PackIconMaterial Kind="DeleteEmpty" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
             <Button>

@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using FolderSizeExplorer.Models;
 using Microsoft.WindowsAPICodePack.Shell;
 
-namespace FolderSizeExplorer.Services
+namespace FolderSizeExplorer.Services.UI
 {
     internal static class TreeViewService
     {
@@ -16,28 +18,27 @@ namespace FolderSizeExplorer.Services
         /// etc.
         /// </summary>
         /// <returns>Collection of specific folders and drivers</returns>
-        public static ObservableCollection<Folder> GetBase()
+        public static void GetBase(ObservableCollection<Folder> folders)
         {
-            return new ObservableCollection<Folder>
+            folders.Clear();
+            var thisPc = new Folder
             {
-                new Folder
-                {
-                    IconSource = "/Resources/Icons/Special/computer.png",
-                    Name = "This PC",
-                    Path = "",
-                    IsExpanded = true,
-                    Subfolders = GetThisPcSubfolders()
-                }
+                IconSource = "/Resources/Icons/Special/computer.png",
+                Name = "This PC",
+                Path = "",
+                IsExpanded = true,
+                Subfolders = new ObservableCollection<Folder>()
             };
+            GetThisPcSubfolders(thisPc.Subfolders);
+            folders.Add(thisPc);
         }
-        public static ObservableCollection<Folder> GetThisPcSubfolders()
+        public static void GetThisPcSubfolders(ObservableCollection<Folder> folders)
         {
-            var thisPcSubfolders = GetSpecialFolders();
-            foreach (var driver in GetDrivers()) 
-                thisPcSubfolders.Add(driver);
-            return thisPcSubfolders;
+            folders.Clear();
+            foreach (var specialFolder in GetSpecialFolders()) folders.Add(specialFolder);
+            foreach (var driver in GetDrivers()) folders.Add(driver);
         }
-        private static ObservableCollection<Folder> GetSpecialFolders()
+        private static List<Folder> GetSpecialFolders()
         {
             var documents = new Folder
             {
@@ -81,7 +82,7 @@ namespace FolderSizeExplorer.Services
                 Path = KnownFolders.Videos.Path
             };
             
-            return new ObservableCollection<Folder>
+            return new List<Folder>
             {
                 desktop,
                 downloads,
@@ -91,21 +92,16 @@ namespace FolderSizeExplorer.Services
                 videos
             };
         }
-        private static ObservableCollection<Folder> GetDrivers()
+        private static List<Folder> GetDrivers()
         {
             var drivers = DriveInfo.GetDrives();
-            var driverFolders = new ObservableCollection<Folder>();
-            foreach (var driver in drivers)
-            {
-                var d = new Folder
+            return drivers.Select(driver => new Folder
                 {
-                    IconSource = "/Resources/Icons/Special/driver.png",
-                    Name = driver.Name,
+                    IconSource = "/Resources/Icons/Special/driver.png", 
+                    Name = driver.Name, 
                     Path = driver.RootDirectory.Name
-                };
-                driverFolders.Add(d);
-            }
-            return driverFolders;
+                })
+                .ToList();
         }
     }
 }

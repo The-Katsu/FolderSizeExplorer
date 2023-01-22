@@ -5,6 +5,7 @@ using FolderSizeExplorer.Infrastructure.Commands;
 using FolderSizeExplorer.Infrastructure.Events;
 using FolderSizeExplorer.Models;
 using FolderSizeExplorer.Services;
+using FolderSizeExplorer.Services.UI;
 using FolderSizeExplorer.ViewModels.Base;
 
 namespace FolderSizeExplorer.ViewModels
@@ -22,7 +23,8 @@ namespace FolderSizeExplorer.ViewModels
 
         #region Collections
 
-        public ObservableCollection<Folder> Folders { get; }
+        public ObservableCollection<Folder> Folders { get; } = 
+            new ObservableCollection<Folder>();
         public ObservableCollection<FileDetails> FileDetailsCollection { get; set; } =
             new ObservableCollection<FileDetails>();
         public ObservableCollection<SpecialFileDetails> SpecialFileDetailsCollection { get; set; } = 
@@ -42,14 +44,8 @@ namespace FolderSizeExplorer.ViewModels
                 {
                     _currentDirectory = value;
                     IsStartupPage = _currentDirectory == string.Empty;
-                    
                     _history.AddAfter(_history.Last, value);
-                    
-                    if (_currentDirectory == string.Empty) 
-                        SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
-                    else
-                        FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory);
-                    
+                    UpdateExplorer();
                     OnPropertyChanged();
                 }
             }
@@ -75,52 +71,41 @@ namespace FolderSizeExplorer.ViewModels
 
         #region Methods
 
-        #region EventsCathcer
+        #region Private Helpers
 
-        private void OnExplorerUpdate(object sender, UpdateExplorerEvent e)
+        private void UpdateExplorer()
         {
             if (_currentDirectory == string.Empty) 
                 SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
             else
-                FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory);
-
+                FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory);   
         }
-        
-        private void OnDirectoryChanged(object sender, ValueChangedEvent<string> e)
+        private void HistoryMove(bool prev, bool next, bool up)
         {
-            CurrentDirectory = e.NewValue;
-            _currentHistoryNode = _history.Last;
-        }
-
-        private void OnHistoryChanged(object sender, HistoryChangeEvent e)
-        {
-            if (e.Previous)
+            if (prev || next)
             {
                 for (var node = _history.First; node != null; node = node.Next)
                 {
-                    if (node == _currentHistoryNode && node.Previous != null)
+                    if (node == _currentHistoryNode)
                     {
-                        _currentHistoryNode = node.Previous;
-                        CurrentDirectory = _currentHistoryNode?.Value;
-                        break;
+                        if (prev && node.Previous != null)
+                        {
+                            _currentHistoryNode = node.Previous;
+                            CurrentDirectory = _currentHistoryNode.Value;
+                            break;
+                        }
+
+                        if (next && node.Next != null)
+                        {
+                            _currentHistoryNode = node.Next;
+                            CurrentDirectory = _currentHistoryNode.Value;
+                            break;
+                        }
                     }
                 }
             }
 
-            if (e.Next)
-            {
-                for (var node = _history.First; node != null; node = node.Next)
-                {
-                    if (node == _currentHistoryNode && node.Next != null)
-                    {
-                        _currentHistoryNode = node.Next;
-                        CurrentDirectory = _currentHistoryNode?.Value;
-                        break;
-                    }
-                }
-            }
-
-            if (e.Up)
+            if (up)
             {
                 if (_currentDirectory != string.Empty)
                 {
@@ -135,6 +120,25 @@ namespace FolderSizeExplorer.ViewModels
         }
 
         #endregion
+
+        #region EventsCathcer
+
+        private void OnExplorerUpdate(object sender, UpdateExplorerEvent e) => UpdateExplorer();
+        
+        private void OnDirectoryChanged(object sender, ValueChangedEvent<string> e)
+        {
+            CurrentDirectory = e.NewValue;
+            _currentHistoryNode = _history.Last;
+        }
+
+        private void OnHistoryChanged(object sender, HistoryChangeEvent e)
+        {
+            if (e.Previous) HistoryMove(true, false, false);
+            if (e.Next) HistoryMove(false, true, false);
+            if (e.Up) HistoryMove(false, false, true);
+        }
+
+        #endregion
         
         #endregion
 
@@ -144,7 +148,7 @@ namespace FolderSizeExplorer.ViewModels
             ExplorerDoubleClickCommand.SelectedPathChanged += OnDirectoryChanged;
             ChangeDirectoryCommand.HistoryChangedEvent += OnHistoryChanged;
             UpdateExplorerCommand.UpdateExplorerEvent += OnExplorerUpdate;
-            Folders = TreeViewService.GetBase();
+            TreeViewService.GetBase(Folders);
             SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
             _history = new LinkedList<string>(new [] {_currentDirectory});
             _currentHistoryNode = _history.First;

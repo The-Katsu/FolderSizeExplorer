@@ -4,6 +4,7 @@ using FolderSizeExplorer.Infrastructure.Events;
 using FolderSizeExplorer.Models.Base;
 using FolderSizeExplorer.Services;
 using FolderSizeExplorer.Services.Helpers;
+using FolderSizeExplorer.Services.UI;
 
 namespace FolderSizeExplorer.Models
 {
@@ -29,9 +30,7 @@ namespace FolderSizeExplorer.Models
                     // This PC case
                     case true when Path == "":
                     {
-                        Subfolders.Clear();
-                        foreach (var subfolder in TreeViewService.GetThisPcSubfolders()) 
-                            Subfolders.Add(subfolder);
+                        TreeViewService.GetThisPcSubfolders(Subfolders);
                         break;
                     }
                     case true when Path != "":

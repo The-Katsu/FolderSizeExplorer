@@ -1,12 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
-using System.Windows;
 using FolderSizeExplorer.Models;
 using FolderSizeExplorer.Services.Helpers;
-using System.Windows.Media.Imaging;
 
-namespace FolderSizeExplorer.Services
+namespace FolderSizeExplorer.Services.UI
 {
     internal static class FileDetailsService
     {

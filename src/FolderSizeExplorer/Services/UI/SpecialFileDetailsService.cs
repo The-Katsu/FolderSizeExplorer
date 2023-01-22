@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using FolderSizeExplorer.Models;
 using FolderSizeExplorer.Services.Helpers;
 using Microsoft.WindowsAPICodePack.Shell;
 
-namespace FolderSizeExplorer.Services
+namespace FolderSizeExplorer.Services.UI
 {
     internal static class SpecialFileDetailsService
     {
@@ -100,10 +101,7 @@ namespace FolderSizeExplorer.Services
         private static List<SpecialFileDetails> GetDriverFiles()
         {
             var drivers = DriveInfo.GetDrives();
-            var driverFiles = new List<SpecialFileDetails>();
-            foreach (var driver in drivers)
-            {
-                var d = new SpecialFileDetails()
+            return drivers.Select(driver => new SpecialFileDetails
                 {
                     IconSource = "/Resources/Icons/Special/driver.png",
                     Name = driver.Name,
@@ -112,10 +110,8 @@ namespace FolderSizeExplorer.Services
                     FreeSpace = driver.TotalFreeSpace,
                     Type = "Driver",
                     IsDirectory = true
-                };
-                driverFiles.Add(d);
-            }
-            return driverFiles;
+                })
+                .ToList();
         }
     }
 }
