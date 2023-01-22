@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 using FolderSizeExplorer.Models;
 using FolderSizeExplorer.Services.Helpers;
+using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 
 namespace FolderSizeExplorer.Services.UI
 {
@@ -29,7 +31,7 @@ namespace FolderSizeExplorer.Services.UI
             {
                 var f = new FileDetails
                 {
-                    IconSource = "/Resources/Icons/Special/file.png",
+                    IconSource = FileService.GetImageByExtension(file.Extension),
                     Name = file.Name,
                     Path = file.FullName,
                     Size = file.Length,

@@ -13,25 +13,39 @@ namespace FolderSizeExplorer.Test.Console
     {
         static void Main(string[] args)
         {
-            var files = new DirectoryInfo("C:\\").GetFiles("*.*", SearchOption.AllDirectories);
             var w = new System.Diagnostics.Stopwatch();
             
             w.Start();
 
-           var l1 = CalculateSize("C:\\");
+            var l1 = GetZabilNazvanie("C:\\Program Files");
             
             w.Stop();
 
-            System.Console.WriteLine($"Execution time 1 with {l1} : {w.ElapsedMilliseconds}");
+            System.Console.WriteLine($"Execution time : {w.ElapsedMilliseconds}");
 
-            w.Reset();
-            w.Start();
+            var n = new List<string>();
+            
+            foreach (var i in l1)
+            {
+                var k = 0;
+                foreach (var j in l1)
+                {
+                    if (string.Equals(i, j))
+                    {
+                        k++;
+                        if (k >=3) break;
+                    }
+                    
+                }
 
-            var l3 = GetDirectorySize("C:\\");
-            
-            w.Stop();
-            
-            System.Console.WriteLine($"Execution time 2 with {l3} : {w.ElapsedMilliseconds}");
+                if (k > 3)
+                {
+                    n.Add(i);
+                }
+            }
+
+            var s = string.Join("\n", l1);            
+            System.Console.WriteLine(s);
         }
 
         public static long GetDirectorySize(string parentDirectory)
@@ -92,7 +106,33 @@ namespace FolderSizeExplorer.Test.Console
                 return 0;
             }
         }
-        
+
+        public static List<string> GetZabilNazvanie(string path)
+        {
+            var dir = new DirectoryInfo(path);
+            var result = new List<string>();
+            try
+            {
+                var files = dir.GetFiles();
+                foreach (var f in files)
+                {
+                    result.Add(f.Extension);
+                }
+
+                var dirs = dir.GetDirectories();
+                foreach (var d in dirs)
+                {
+                    result.AddRange(GetZabilNazvanie(d.FullName));
+                }
+            }
+            catch (Exception e)
+            {
+                // ignored
+            }
+
+            return result;
+        }
+
         public static long CalculateSize(string path)
         {
             long size = 0;   

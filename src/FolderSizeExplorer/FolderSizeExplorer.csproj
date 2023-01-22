@@ -94,6 +94,7 @@
     <Compile Include="Models\Folder.cs" />
     <Compile Include="Models\SpecialFileDetails.cs" />
     <Compile Include="Services\Helpers\BinService.cs" />
+    <Compile Include="Services\Helpers\FileService.cs" />
     <Compile Include="Services\Helpers\FolderService.cs" />
     <Compile Include="Services\UI\FileDetailsService.cs" />
     <Compile Include="Services\UI\SpecialFileDetailsService.cs" />
@@ -150,6 +151,24 @@
     <Resource Include="Resources\Icons\Special\music.png" />
     <Resource Include="Resources\Icons\Special\pictures.png" />
     <Resource Include="Resources\Icons\Special\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\base.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\doc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\xls.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\pdf.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

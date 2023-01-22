@@ -200,8 +200,8 @@
                                                         <DataGridTemplateColumn.CellTemplate>
                                                             <DataTemplate>
                                                                 <StackPanel Orientation="Horizontal" >
-                                                                    <Image Width="18" Height="18" Source="{Binding IconSource}"></Image>
-                                                                    <TextBlock Margin="3,0,0,0" Text="{Binding Name}"></TextBlock>
+                                                                    <Image Width="22" Height="22" Source="{Binding IconSource}"></Image>
+                                                                    <TextBlock Margin="3,3,0,0" Text="{Binding Name}"></TextBlock>
                                                                 </StackPanel>
                                                             </DataTemplate>
                                                         </DataGridTemplateColumn.CellTemplate>
@@ -240,12 +240,12 @@
                                                         CommandParameter="{Binding ElementName=SpecialFilesExplorer, Path=SelectedItem}" />
                                                 </DataGrid.InputBindings>
                                                 <DataGrid.Columns>
-                                                    <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="auto" MaxWidth="200">
+                                                    <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="200">
                                                         <DataGridTemplateColumn.CellTemplate>
                                                             <DataTemplate>
                                                                 <StackPanel Orientation="Horizontal" >
-                                                                    <Image Width="18" Height="18" Source="{Binding IconSource}"></Image>
-                                                                    <TextBlock Margin="3,0,0,0" Text="{Binding Name}"></TextBlock>
+                                                                    <Image Width="22" Height="22" Source="{Binding IconSource}"></Image>
+                                                                    <TextBlock Margin="3,3,0,0" Text="{Binding Name}"></TextBlock>
                                                                 </StackPanel>
                                                             </DataTemplate>
                                                         </DataGridTemplateColumn.CellTemplate>
