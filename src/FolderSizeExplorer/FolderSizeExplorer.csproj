@@ -170,5 +170,8 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Extension\pdf.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\zip.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

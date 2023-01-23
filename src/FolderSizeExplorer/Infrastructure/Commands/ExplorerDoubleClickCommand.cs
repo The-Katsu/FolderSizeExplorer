@@ -2,6 +2,7 @@
 using FolderSizeExplorer.Infrastructure.Commands.Base;
 using FolderSizeExplorer.Infrastructure.Events;
 using FolderSizeExplorer.Models.Base;
+using FolderSizeExplorer.Services.Helpers;
 
 namespace FolderSizeExplorer.Infrastructure.Commands
 {
@@ -14,8 +15,8 @@ namespace FolderSizeExplorer.Infrastructure.Commands
             var file = parameter as File;
             if (file.IsDirectory)
                 SelectedPathChanged?.Invoke(this, new ValueChangedEvent<string>((parameter as File)?.Path));
-            
-            
+            else
+                FileService.Open((parameter as File)?.Path);
         }
 
         public static event EventHandler<ValueChangedEvent<string>> SelectedPathChanged;

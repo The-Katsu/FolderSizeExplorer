@@ -1,8 +1,20 @@
-﻿namespace FolderSizeExplorer.Services.Helpers
+﻿using System.Diagnostics;
+using System.IO;
+
+namespace FolderSizeExplorer.Services.Helpers
 {
     internal static class FileService
     {
-        internal static string GetImageByExtension(string extension)
+        public static void Open(string path)
+        {
+            //File.Open(path, FileMode.Open);
+            var proc = new Process();
+            proc.EnableRaisingEvents = false;
+            proc.StartInfo.FileName = path;
+            proc.Start();
+        }
+        
+        public static string GetImageByExtension(string extension)
         {
             switch (extension)
             {
@@ -23,7 +35,10 @@
                 case ".xlsx":
                     return "/Resources/Icons/Extension/xls.png";      
                 case ".pdf":
-                    return "/Resources/Icons/Extension/pdf.png";   
+                    return "/Resources/Icons/Extension/pdf.png";  
+                case ".zip":
+                case ".7z":
+                    return "/Resources/Icons/Extension/zip.png";
                 default:
                     return "/Resources/Icons/Extension/base.png";
             }
