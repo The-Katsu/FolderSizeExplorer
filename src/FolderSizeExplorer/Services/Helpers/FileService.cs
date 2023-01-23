@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.IO;
 
 namespace FolderSizeExplorer.Services.Helpers
 {
@@ -7,7 +6,6 @@ namespace FolderSizeExplorer.Services.Helpers
     {
         public static void Open(string path)
         {
-            //File.Open(path, FileMode.Open);
             var proc = new Process();
             proc.EnableRaisingEvents = false;
             proc.StartInfo.FileName = path;

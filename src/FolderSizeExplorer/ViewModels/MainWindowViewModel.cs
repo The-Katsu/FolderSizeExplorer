@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using FolderSizeExplorer.Infrastructure.Commands;
 using FolderSizeExplorer.Infrastructure.Events;
 using FolderSizeExplorer.Models;
-using FolderSizeExplorer.Services;
 using FolderSizeExplorer.Services.UI;
 using FolderSizeExplorer.ViewModels.Base;
+using File = FolderSizeExplorer.Models.Base.File;
 
 namespace FolderSizeExplorer.ViewModels
 {
@@ -34,6 +36,17 @@ namespace FolderSizeExplorer.ViewModels
         
         #region Properties
 
+        private List<File> _currentFiles;
+        public List<File> CurrentFiles
+        {
+            get => _currentFiles;
+            private set
+            {
+                _currentFiles = value;
+                OnPropertyChanged();
+            }
+        }
+        
         private string _currentDirectory = string.Empty;
         public string CurrentDirectory
         {
@@ -75,10 +88,16 @@ namespace FolderSizeExplorer.ViewModels
 
         private void UpdateExplorer()
         {
-            if (_currentDirectory == string.Empty) 
+            if (_currentDirectory == string.Empty)
+            {
                 SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
+                CurrentFiles = SpecialFileDetailsCollection.Cast<File>().ToList();
+            }
             else
-                FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory);   
+            {
+                FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory);
+                CurrentFiles = FileDetailsCollection.Cast<File>().ToList();
+            } 
         }
         private void HistoryMove(bool prev, bool next, bool up)
         {
@@ -150,6 +169,7 @@ namespace FolderSizeExplorer.ViewModels
             UpdateExplorerCommand.UpdateExplorerEvent += OnExplorerUpdate;
             TreeViewService.GetBase(Folders);
             SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
+            CurrentFiles = SpecialFileDetailsCollection.Cast<File>().ToList();
             _history = new LinkedList<string>(new [] {_currentDirectory});
             _currentHistoryNode = _history.First;
         }

@@ -19,6 +19,7 @@
         <cmd:ChangeDirectoryCommand x:Key="ChangeDirectoryCommand"></cmd:ChangeDirectoryCommand>
         <cmd:UpdateExplorerCommand x:Key="UpdateExplorerCommand"></cmd:UpdateExplorerCommand>
         <cmd:EmptyRecycleBinCommand x:Key="EmptyRecycleBinCommand"></cmd:EmptyRecycleBinCommand>
+        <cmd:ExportToCsvCommand x:Key="ExportToCsvCommand"></cmd:ExportToCsvCommand>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -134,7 +135,9 @@
             <Button>
                 <icon:PackIconMaterial Kind="FolderEyeOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
-            <Button>
+            <Button
+                Command="{StaticResource ExportToCsvCommand}"
+                CommandParameter="{Binding CurrentFiles}">
                 <icon:PackIconMaterial Kind="FileDelimitedOutline" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
         </ToolBar>

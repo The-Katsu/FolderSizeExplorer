@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace FolderSizeExplorer.Services.Helpers
+namespace FolderSizeExplorer.Services
 {
     internal static class BinService
     {
