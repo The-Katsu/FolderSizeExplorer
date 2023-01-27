@@ -36,6 +36,7 @@ namespace FolderSizeExplorer.Services.Helpers
                     return "/Resources/Icons/Extension/pdf.png";  
                 case ".zip":
                 case ".7z":
+                case ".rar":
                     return "/Resources/Icons/Extension/zip.png";
                 default:
                     return "/Resources/Icons/Extension/base.png";

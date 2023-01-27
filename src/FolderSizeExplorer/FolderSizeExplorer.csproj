@@ -91,7 +91,7 @@
     <Compile Include="Infrastructure\Commands\ExportToCsvCommand.cs" />
     <Compile Include="Infrastructure\Commands\UpdateExplorerCommand.cs" />
     <Compile Include="Infrastructure\Events\HistoryChangeEvent.cs" />
-    <Compile Include="Infrastructure\Events\UpdateExplorerEvent.cs" />
+    <Compile Include="Infrastructure\Events\EmptyArgsEvent.cs" />
     <Compile Include="Infrastructure\Events\ValueChangedEvent.cs" />
     <Compile Include="Models\Base\File.cs" />
     <Compile Include="Models\FileDetails.cs" />

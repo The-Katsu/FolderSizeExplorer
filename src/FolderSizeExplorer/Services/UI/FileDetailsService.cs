@@ -16,9 +16,9 @@ namespace FolderSizeExplorer.Services.UI
         private static CancellationTokenSource _tokenSource;
         public static event EventHandler<ValueChangedEvent<int>> ProgressBarUpdate;
 
-        private static void OnCancellingEvent(object sender, ValueChangedEvent<bool> e)
+        private static void OnCancellingEvent(object sender, EmptyArgsEvent e)
         {
-            if (e.NewValue) _tokenSource.Cancel();
+            _tokenSource.Cancel();
         }
         public static void GetFiles(ObservableCollection<FileDetails> fileDetailsCollection, string path)
         {
@@ -44,7 +44,7 @@ namespace FolderSizeExplorer.Services.UI
                         Name = directory.Name,
                         Path = directory.FullName,
                         Size = FolderService.CalculateSize(directory.FullName),
-                        Type = directory.Extension,
+                        Type = directory.Extension == string.Empty ? "File folder" : directory.Extension,
                         IsDirectory = true
                     };
                     if (token.IsCancellationRequested) break;

@@ -18,7 +18,7 @@ namespace FolderSizeExplorer.ViewModels
 
         #region Events
 
-        public static event EventHandler<ValueChangedEvent<bool>> CancelFilesUploading;
+        public static event EventHandler<EmptyArgsEvent> CancelFilesUploading;
 
         #endregion
         
@@ -161,15 +161,15 @@ namespace FolderSizeExplorer.ViewModels
 
         #region EventsCathcer
 
-        private void OnExplorerUpdate(object sender, UpdateExplorerEvent e)
+        private void OnExplorerUpdate(object sender, EmptyArgsEvent e)
         {
-            CancelFilesUploading?.Invoke(this, new ValueChangedEvent<bool>(true));
+            CancelFilesUploading?.Invoke(this, new EmptyArgsEvent());
             UpdateExplorer();
         }
 
         private void OnDirectoryChanged(object sender, ValueChangedEvent<string> e)
         {
-            CancelFilesUploading?.Invoke(this, new ValueChangedEvent<bool>(true));
+            CancelFilesUploading?.Invoke(this, new EmptyArgsEvent());
             CurrentDirectory = e.NewValue;
             _currentHistoryNode = _history.Last;
         }
@@ -181,7 +181,7 @@ namespace FolderSizeExplorer.ViewModels
 
         private void OnHistoryChanged(object sender, HistoryChangeEvent e)
         {
-            CancelFilesUploading?.Invoke(this, new ValueChangedEvent<bool>(true));
+            CancelFilesUploading?.Invoke(this, new EmptyArgsEvent());
             if (e.Previous) HistoryMove(true, false, false);
             if (e.Next) HistoryMove(false, true, false);
             if (e.Up) HistoryMove(false, false, true);
@@ -198,6 +198,7 @@ namespace FolderSizeExplorer.ViewModels
             ChangeDirectoryCommand.HistoryChangedEvent += OnHistoryChanged;
             UpdateExplorerCommand.UpdateExplorerEvent += OnExplorerUpdate;
             FileDetailsService.ProgressBarUpdate += OnProgressBarUpdate;
+            SpecialFileDetailsService.ProgressBarUpdate += OnProgressBarUpdate;
             TreeViewService.GetBase(Folders);
             SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
             CurrentFiles = SpecialFileDetailsCollection.Cast<File>().ToList();

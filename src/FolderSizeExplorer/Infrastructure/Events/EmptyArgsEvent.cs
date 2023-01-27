@@ -2,7 +2,7 @@
 
 namespace FolderSizeExplorer.Infrastructure.Events
 {
-    internal class UpdateExplorerEvent : EventArgs
+    internal class EmptyArgsEvent : EventArgs
     {
     }
 }

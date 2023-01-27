@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using FolderSizeExplorer.Infrastructure.Events;
 using FolderSizeExplorer.Models;
-using FolderSizeExplorer.Services.Helpers;
 using Microsoft.WindowsAPICodePack.Shell;
 
 namespace FolderSizeExplorer.Services.UI
 {
     internal static class SpecialFileDetailsService
     {
+        public static event EventHandler<ValueChangedEvent<int>> ProgressBarUpdate;
         public static void GetBase(ObservableCollection<SpecialFileDetails> specialFileDetailsCollection)
         {
             specialFileDetailsCollection.Clear();
@@ -24,6 +25,8 @@ namespace FolderSizeExplorer.Services.UI
             {
                 specialFileDetailsCollection.Add(driverFile);
             }
+            
+            ProgressBarUpdate?.Invoke(null, new ValueChangedEvent<int>(100));
         }
 
         private static List<SpecialFileDetails> GetSpecialFiles()

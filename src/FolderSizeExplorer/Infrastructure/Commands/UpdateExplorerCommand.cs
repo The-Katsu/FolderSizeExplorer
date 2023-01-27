@@ -10,6 +10,6 @@ namespace FolderSizeExplorer.Infrastructure.Commands
 
         public override void Execute(object parameter) => UpdateExplorerEvent?.Invoke(this, null);
 
-        public static event EventHandler<UpdateExplorerEvent> UpdateExplorerEvent;
+        public static event EventHandler<EmptyArgsEvent> UpdateExplorerEvent;
     }
 }

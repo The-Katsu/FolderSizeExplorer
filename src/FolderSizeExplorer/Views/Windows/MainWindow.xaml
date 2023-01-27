@@ -63,48 +63,6 @@
                 Command="{StaticResource UpdateExplorerCommand}">
                 <icon:PackIconMaterial Kind="Refresh" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
             </Button>
-            
-            <Separator Width="4"></Separator>
-
-            <ToggleButton>
-                <icon:PackIconMaterial Kind="Calculator" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
-                <ToggleButton.Style>
-                    <Style TargetType="{x:Type ToggleButton}">
-                        <Setter Property="Background" Value="#623ed0"></Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Background" Value="Gray"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ToggleButton.Style>
-            </ToggleButton>
-            <ToggleButton>
-                <icon:PackIconMaterial Kind="Folder" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
-                <ToggleButton.Style>
-                    <Style TargetType="{x:Type ToggleButton}">
-                        <Setter Property="Background" Value="#623ed0"></Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Background" Value="Gray"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ToggleButton.Style>
-            </ToggleButton>
-            <ToggleButton>
-                <icon:PackIconMaterial Kind="File" Foreground="White" Width="30" Height="30"></icon:PackIconMaterial>
-                <ToggleButton.Style>
-                    <Style TargetType="{x:Type ToggleButton}">
-                        <Setter Property="Background" Value="#623ed0"></Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Background" Value="Gray"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ToggleButton.Style>
-            </ToggleButton>
 
             <Separator Width="4"></Separator>
 
