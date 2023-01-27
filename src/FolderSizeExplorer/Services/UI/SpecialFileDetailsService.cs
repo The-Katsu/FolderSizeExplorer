@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using FolderSizeExplorer.Models;
 using FolderSizeExplorer.Services.Helpers;
 using Microsoft.WindowsAPICodePack.Shell;
@@ -13,7 +14,7 @@ namespace FolderSizeExplorer.Services.UI
         public static void GetBase(ObservableCollection<SpecialFileDetails> specialFileDetailsCollection)
         {
             specialFileDetailsCollection.Clear();
-            
+
             foreach (var specialFile in GetSpecialFiles())
             {
                 specialFileDetailsCollection.Add(specialFile);
@@ -33,7 +34,7 @@ namespace FolderSizeExplorer.Services.UI
                 Name = KnownFolders.Documents.CanonicalName,
                 Path = KnownFolders.Documents.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Documents.Path),
+                //TotalSpace = FolderService.CalculateSize(KnownFolders.Documents.Path),
                 IsDirectory = true
             };
 
@@ -43,7 +44,7 @@ namespace FolderSizeExplorer.Services.UI
                 Name = KnownFolders.Downloads.CanonicalName,
                 Path = KnownFolders.Downloads.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Downloads.Path),
+                //TotalSpace = FolderService.CalculateSize(KnownFolders.Downloads.Path),
                 IsDirectory = true
             };
 
@@ -53,7 +54,7 @@ namespace FolderSizeExplorer.Services.UI
                 Name = KnownFolders.Desktop.CanonicalName,
                 Path = KnownFolders.Desktop.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Desktop.Path),
+                //TotalSpace = FolderService.CalculateSize(KnownFolders.Desktop.Path),
                 IsDirectory = true
             };
 
@@ -63,7 +64,7 @@ namespace FolderSizeExplorer.Services.UI
                 Name = KnownFolders.Music.CanonicalName,
                 Path = KnownFolders.Music.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Music.Path),
+                //TotalSpace = FolderService.CalculateSize(KnownFolders.Music.Path),
                 IsDirectory = true
             };
 
@@ -73,7 +74,7 @@ namespace FolderSizeExplorer.Services.UI
                 Name = KnownFolders.Pictures.CanonicalName,
                 Path = KnownFolders.Pictures.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Pictures.Path),
+                //TotalSpace = FolderService.CalculateSize(KnownFolders.Pictures.Path),
                 IsDirectory = true
             };
             
@@ -83,7 +84,7 @@ namespace FolderSizeExplorer.Services.UI
                 Name = KnownFolders.Videos.CanonicalName,
                 Path = KnownFolders.Videos.Path,
                 Type = "Specific Folder",
-                TotalSpace = FolderService.CalculateSize(KnownFolders.Videos.Path),
+                //TotalSpace = FolderService.CalculateSize(KnownFolders.Videos.Path),
                 IsDirectory = true
             };
 

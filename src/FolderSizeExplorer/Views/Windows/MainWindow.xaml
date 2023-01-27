@@ -25,6 +25,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="0.9*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.4*" MinWidth="150"></ColumnDefinition>
@@ -271,8 +272,23 @@
             </ContentControl>
         </StackPanel>
         
+        <!--#endregion -->
         
+        <!--#region Progress bar -->
+        
+        <ProgressBar 
+            Grid.Row="2"
+            Grid.Column="0"
+            Minimum="0" 
+            Maximum="100"
+            x:Name="ProgressBar"
+            Height="30"
+            Foreground="#623ed0"
+            Value="{Binding Percent, Mode=OneWay}"
+            >
+        </ProgressBar>
         
         <!--#endregion -->
+        
     </Grid>
 </Window>

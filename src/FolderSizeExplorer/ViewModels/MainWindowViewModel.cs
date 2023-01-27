@@ -16,6 +16,12 @@ namespace FolderSizeExplorer.ViewModels
     {
         #region Fields
 
+        #region Events
+
+        public static event EventHandler<ValueChangedEvent<bool>> CancelFilesUploading;
+
+        #endregion
+        
         #region History
 
         private LinkedList<string> _history;
@@ -36,6 +42,19 @@ namespace FolderSizeExplorer.ViewModels
         
         #region Properties
 
+        private int _percent = 0;
+
+        public int Percent
+        {
+            get => _percent;
+            set
+            {
+                _percent = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        // used for csv data export
         private List<File> _currentFiles;
         public List<File> CurrentFiles
         {
@@ -97,7 +116,7 @@ namespace FolderSizeExplorer.ViewModels
             {
                 FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory);
                 CurrentFiles = FileDetailsCollection.Cast<File>().ToList();
-            } 
+            }
         }
         private void HistoryMove(bool prev, bool next, bool up)
         {
@@ -142,16 +161,27 @@ namespace FolderSizeExplorer.ViewModels
 
         #region EventsCathcer
 
-        private void OnExplorerUpdate(object sender, UpdateExplorerEvent e) => UpdateExplorer();
-        
+        private void OnExplorerUpdate(object sender, UpdateExplorerEvent e)
+        {
+            CancelFilesUploading?.Invoke(this, new ValueChangedEvent<bool>(true));
+            UpdateExplorer();
+        }
+
         private void OnDirectoryChanged(object sender, ValueChangedEvent<string> e)
         {
+            CancelFilesUploading?.Invoke(this, new ValueChangedEvent<bool>(true));
             CurrentDirectory = e.NewValue;
             _currentHistoryNode = _history.Last;
         }
 
+        private void OnProgressBarUpdate(object sender, ValueChangedEvent<int> e)
+        {
+            Percent = e.NewValue;
+        }
+
         private void OnHistoryChanged(object sender, HistoryChangeEvent e)
         {
+            CancelFilesUploading?.Invoke(this, new ValueChangedEvent<bool>(true));
             if (e.Previous) HistoryMove(true, false, false);
             if (e.Next) HistoryMove(false, true, false);
             if (e.Up) HistoryMove(false, false, true);
@@ -167,6 +197,7 @@ namespace FolderSizeExplorer.ViewModels
             ExplorerDoubleClickCommand.SelectedPathChanged += OnDirectoryChanged;
             ChangeDirectoryCommand.HistoryChangedEvent += OnHistoryChanged;
             UpdateExplorerCommand.UpdateExplorerEvent += OnExplorerUpdate;
+            FileDetailsService.ProgressBarUpdate += OnProgressBarUpdate;
             TreeViewService.GetBase(Folders);
             SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
             CurrentFiles = SpecialFileDetailsCollection.Cast<File>().ToList();
