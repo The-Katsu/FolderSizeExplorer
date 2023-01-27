@@ -24,5 +24,11 @@ namespace FolderSizeExplorer.Test.UI
         {
             InitializeComponent();
         }
+
+        private void Button_OnClick(object sender, RoutedEventArgs e)
+        {
+            Browser.Source = new Uri("C:\\");
+            Console.WriteLine();
+        }
     }
 }

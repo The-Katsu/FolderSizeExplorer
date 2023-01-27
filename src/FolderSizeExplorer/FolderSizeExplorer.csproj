@@ -40,20 +40,23 @@
     <ApplicationIcon>Resources\Icons\Executable\exe.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CustomMarshalers" />
     <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net47\MahApps.Metro.IconPacks.Core.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro.IconPacks.Material, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net47\MahApps.Metro.IconPacks.Material.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.4.0, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft-WindowsAPICodePack-Core.1.1.4\lib\net48\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.4.0, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft-WindowsAPICodePack-Shell.1.1.4\lib\net48\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -66,6 +69,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -80,11 +84,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Events\ValueChangedEvent.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
-    <Compile Include="Models\FileDetailsModel.cs" />
+    <Compile Include="Infrastructure\Commands\EmptyRecycleBinCommand.cs" />
+    <Compile Include="Infrastructure\Commands\ExplorerDoubleClickCommand.cs" />
+    <Compile Include="Infrastructure\Commands\ChangeDirectoryCommand.cs" />
+    <Compile Include="Infrastructure\Commands\ExportToCsvCommand.cs" />
+    <Compile Include="Infrastructure\Commands\UpdateExplorerCommand.cs" />
+    <Compile Include="Infrastructure\Events\HistoryChangeEvent.cs" />
+    <Compile Include="Infrastructure\Events\EmptyArgsEvent.cs" />
+    <Compile Include="Infrastructure\Events\ValueChangedEvent.cs" />
+    <Compile Include="Models\Base\File.cs" />
+    <Compile Include="Models\FileDetails.cs" />
     <Compile Include="Models\Folder.cs" />
-    <Compile Include="Services\FolderService.cs" />
+    <Compile Include="Models\SpecialFileDetails.cs" />
+    <Compile Include="Services\BinService.cs" />
+    <Compile Include="Services\CsvService.cs" />
+    <Compile Include="Services\Helpers\FileService.cs" />
+    <Compile Include="Services\Helpers\FolderService.cs" />
+    <Compile Include="Services\UI\FileDetailsService.cs" />
+    <Compile Include="Services\UI\SpecialFileDetailsService.cs" />
+    <Compile Include="Services\UI\TreeViewService.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\Windows\MainWindow.xaml.cs">
@@ -122,22 +141,42 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Services\" />
-    <Folder Include="Services\Helpers" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Executable\exe.ico" />
-    <Resource Include="Resources\Icons\TreeView\computer.png" />
-    <Resource Include="Resources\Icons\TreeView\driver.png" />
-    <Resource Include="Resources\Icons\TreeView\file.png" />
-    <Resource Include="Resources\Icons\TreeView\folder.png" />
+    <Resource Include="Resources\Icons\Special\computer.png" />
+    <Resource Include="Resources\Icons\Special\driver.png" />
+    <Resource Include="Resources\Icons\Special\file.png" />
+    <Resource Include="Resources\Icons\Special\folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\TreeView\desktop.png" />
-    <Resource Include="Resources\Icons\TreeView\documents.png" />
-    <Resource Include="Resources\Icons\TreeView\downloads.png" />
-    <Resource Include="Resources\Icons\TreeView\music.png" />
-    <Resource Include="Resources\Icons\TreeView\pictures.png" />
-    <Resource Include="Resources\Icons\TreeView\video.png" />
+    <Resource Include="Resources\Icons\Special\desktop.png" />
+    <Resource Include="Resources\Icons\Special\documents.png" />
+    <Resource Include="Resources\Icons\Special\downloads.png" />
+    <Resource Include="Resources\Icons\Special\music.png" />
+    <Resource Include="Resources\Icons\Special\pictures.png" />
+    <Resource Include="Resources\Icons\Special\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\base.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\doc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\xls.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Extension\zip.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

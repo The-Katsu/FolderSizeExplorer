@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Button Click="Button_OnClick" Grid.Row="0" x:Name="Button" Width="100" Height="100" >Open</Button>
+        <WebBrowser Grid.Row="1" x:Name="Browser"></WebBrowser>
     </Grid>
 </Window>
