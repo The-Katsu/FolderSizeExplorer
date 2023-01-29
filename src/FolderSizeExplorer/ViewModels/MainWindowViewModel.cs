@@ -19,7 +19,7 @@ namespace FolderSizeExplorer.ViewModels
         #region Events
 
         public static event EventHandler<EmptyArgsEvent> CancelFilesUploading;
-
+    
         #endregion
         
         #region History
@@ -42,6 +42,8 @@ namespace FolderSizeExplorer.ViewModels
         
         #region Properties
 
+        private string _unit = "MB";
+        
         private int _percent = 0;
 
         public int Percent
@@ -109,12 +111,12 @@ namespace FolderSizeExplorer.ViewModels
         {
             if (_currentDirectory == string.Empty)
             {
-                SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
+                SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection, _unit);
                 CurrentFiles = SpecialFileDetailsCollection.Cast<File>().ToList();
             }
             else
             {
-                FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory);
+                FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory, _unit);
                 CurrentFiles = FileDetailsCollection.Cast<File>().ToList();
             }
         }
@@ -187,6 +189,15 @@ namespace FolderSizeExplorer.ViewModels
             if (e.Up) HistoryMove(false, false, true);
         }
 
+        private void OnSizeUnitChanged(object sender, ValueChangedEvent<string> e)
+        {
+            if (!string.Equals(e.NewValue, _unit))
+            {
+                _unit = e.NewValue;
+                UpdateExplorer();
+            }
+        }
+        
         #endregion
         
         #endregion
@@ -199,6 +210,7 @@ namespace FolderSizeExplorer.ViewModels
             UpdateExplorerCommand.UpdateExplorerEvent += OnExplorerUpdate;
             FileDetailsService.ProgressBarUpdate += OnProgressBarUpdate;
             SpecialFileDetailsService.ProgressBarUpdate += OnProgressBarUpdate;
+            ChangeSizeUnitCommand.SizeUnitChanged += OnSizeUnitChanged; 
             TreeViewService.GetBase(Folders);
             SpecialFileDetailsService.GetBase(SpecialFileDetailsCollection);
             CurrentFiles = SpecialFileDetailsCollection.Cast<File>().ToList();
