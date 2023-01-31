@@ -116,8 +116,8 @@ namespace FolderSizeExplorer.ViewModels
             }
             else
             {
-                FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory, _unit);
-                CurrentFiles = FileDetailsCollection.Cast<File>().ToList();
+                CurrentFiles.Clear();
+                FileDetailsService.GetFiles(FileDetailsCollection, _currentDirectory, CurrentFiles, _unit);
             }
         }
         private void HistoryMove(bool prev, bool next, bool up)
