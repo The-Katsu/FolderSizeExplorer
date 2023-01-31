@@ -21,6 +21,7 @@
         <cmd:EmptyRecycleBinCommand x:Key="EmptyRecycleBinCommand"></cmd:EmptyRecycleBinCommand>
         <cmd:ExportToCsvCommand x:Key="ExportToCsvCommand"></cmd:ExportToCsvCommand>
         <cmd:ChangeSizeUnitCommand x:Key="ChangeSizeUnitCommand"></cmd:ChangeSizeUnitCommand>
+        <cmd:ViewInExplorerCommand x:Key="ViewInExplorerCommand"></cmd:ViewInExplorerCommand>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -177,9 +178,10 @@
                                                 <DataGrid.Resources>
                                                     <ContextMenu x:Key="Menu">
                                                         <ContextMenu.Items>
-                                                            <MenuItem Header="View"/>
-                                                            <MenuItem Header="Edit"/>
-                                                            <MenuItem Header="Delete"/>
+                                                            <MenuItem Header="View in explorer"
+                                                                      Command="{StaticResource ViewInExplorerCommand}"
+                                                                      CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}"/>
+
                                                         </ContextMenu.Items>
                                                     </ContextMenu>
                                                 </DataGrid.Resources>
@@ -237,9 +239,9 @@
                                                 <DataGrid.Resources>
                                                     <ContextMenu x:Key="Menu">
                                                         <ContextMenu.Items>
-                                                            <MenuItem Header="View"/>
-                                                            <MenuItem Header="Edit"/>
-                                                            <MenuItem Header="Delete"/>
+                                                            <MenuItem Header="View in explorer"
+                                                                      Command="{StaticResource ViewInExplorerCommand}"
+                                                                      CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}"/>
                                                         </ContextMenu.Items>
                                                     </ContextMenu>
                                                 </DataGrid.Resources>
