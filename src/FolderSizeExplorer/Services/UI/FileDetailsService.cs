@@ -20,7 +20,7 @@ namespace FolderSizeExplorer.Services.UI
         {
             _tokenSource.Cancel();
         }
-        public static void GetFiles(ObservableCollection<FileDetails> fileDetailsCollection, string path)
+        public static void GetFiles(ObservableCollection<FileDetails> fileDetailsCollection, string path, string unit = "MB")
         {
             _tokenSource = new CancellationTokenSource();
             var token = _tokenSource.Token;
@@ -45,8 +45,11 @@ namespace FolderSizeExplorer.Services.UI
                         Path = directory.FullName,
                         Size = FolderService.CalculateSize(directory.FullName),
                         Type = directory.Extension == string.Empty ? "File folder" : directory.Extension,
-                        IsDirectory = true
+                        IsDirectory = true,
+                        FoldersCount = FolderService.GetFoldersCount(directory),
+                        FilesCount = FolderService.GetFilesCount(directory)
                     };
+                    dir.HumanReadSize = SizeUnitConverter.ToHumanReadSize(dir.Size, unit);
                     if (token.IsCancellationRequested) break;
                     Application.Current.Dispatcher.Invoke(() => fileDetailsCollection.Add(dir));
                     current++;
@@ -68,6 +71,7 @@ namespace FolderSizeExplorer.Services.UI
                         Type = file.Extension,
                         IsDirectory = false
                     };
+                    f.HumanReadSize = SizeUnitConverter.ToHumanReadSize(f.Size, unit);
                     if (token.IsCancellationRequested) break;
                     Application.Current.Dispatcher.Invoke(() => fileDetailsCollection.Add(f));
                     current++;
@@ -76,5 +80,7 @@ namespace FolderSizeExplorer.Services.UI
             }, token);
             Task.WhenAll(foldersTask, filesTask);
         }
+
+        
     }
 }

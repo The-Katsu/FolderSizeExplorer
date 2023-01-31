@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using FolderSizeExplorer.Infrastructure.Events;
 using FolderSizeExplorer.Models;
+using FolderSizeExplorer.Services.Helpers;
 using Microsoft.WindowsAPICodePack.Shell;
 
 namespace FolderSizeExplorer.Services.UI
@@ -12,7 +13,7 @@ namespace FolderSizeExplorer.Services.UI
     internal static class SpecialFileDetailsService
     {
         public static event EventHandler<ValueChangedEvent<int>> ProgressBarUpdate;
-        public static void GetBase(ObservableCollection<SpecialFileDetails> specialFileDetailsCollection)
+        public static void GetBase(ObservableCollection<SpecialFileDetails> specialFileDetailsCollection, string unit = "MB")
         {
             specialFileDetailsCollection.Clear();
 
@@ -23,6 +24,8 @@ namespace FolderSizeExplorer.Services.UI
 
             foreach (var driverFile in GetDriverFiles())
             {
+                driverFile.HumanReadSize = SizeUnitConverter.ToHumanReadSize(driverFile.TotalSpace, unit);
+                driverFile.FreeSpaceHumanRead = SizeUnitConverter.ToHumanReadSize(driverFile.FreeSpace, unit);
                 specialFileDetailsCollection.Add(driverFile);
             }
             

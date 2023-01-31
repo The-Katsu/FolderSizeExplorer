@@ -20,6 +20,8 @@
         <cmd:UpdateExplorerCommand x:Key="UpdateExplorerCommand"></cmd:UpdateExplorerCommand>
         <cmd:EmptyRecycleBinCommand x:Key="EmptyRecycleBinCommand"></cmd:EmptyRecycleBinCommand>
         <cmd:ExportToCsvCommand x:Key="ExportToCsvCommand"></cmd:ExportToCsvCommand>
+        <cmd:ChangeSizeUnitCommand x:Key="ChangeSizeUnitCommand"></cmd:ChangeSizeUnitCommand>
+        <cmd:ViewInExplorerCommand x:Key="ViewInExplorerCommand"></cmd:ViewInExplorerCommand>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -66,19 +68,39 @@
 
             <Separator Width="4"></Separator>
 
-            <RadioButton Foreground="White" FontSize="20">
+            <RadioButton 
+                x:Name="B" 
+                Command="{StaticResource ChangeSizeUnitCommand}" 
+                CommandParameter="{Binding ElementName=B}" 
+                Foreground="White" FontSize="20">
                 B
             </RadioButton>
-            <RadioButton Foreground="White" FontSize="20">
+            <RadioButton
+                x:Name="KB" 
+                Command="{StaticResource ChangeSizeUnitCommand}" 
+                CommandParameter="{Binding ElementName=KB}" 
+                Foreground="White" FontSize="20">
                 KB
             </RadioButton>
-            <RadioButton Foreground="White" FontSize="20">
+            <RadioButton
+                x:Name="MB" 
+                Command="{StaticResource ChangeSizeUnitCommand}" 
+                CommandParameter="{Binding ElementName=MB}" 
+                IsChecked="True" Foreground="White" FontSize="20">
                 MB
             </RadioButton>
-            <RadioButton Foreground="White" FontSize="20">
+            <RadioButton
+                x:Name="GB" 
+                Command="{StaticResource ChangeSizeUnitCommand}" 
+                CommandParameter="{Binding ElementName=GB}" 
+                Foreground="White" FontSize="20">
                 GB
             </RadioButton>
-            <RadioButton Foreground="White" FontSize="20">
+            <RadioButton 
+                x:Name="TB" 
+                Command="{StaticResource ChangeSizeUnitCommand}" 
+                CommandParameter="{Binding ElementName=TB}" 
+                Foreground="White" FontSize="20">
                 TB
             </RadioButton>
 
@@ -137,6 +159,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate>
+                                            <!-- Special File Explorer -->
                                             <DataGrid 
                                                 x:Name="SpecialFilesExplorer"
                                                 ItemsSource="{Binding Path=SpecialFileDetailsCollection, Mode=TwoWay}" AutoGenerateColumns="False"
@@ -150,7 +173,23 @@
                                                       Height="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                AncestorType={x:Type Grid}},
                                                                Path=RowDefinitions[1].ActualHeight}"
+                                                IsReadOnly="True"
                                                       >
+                                                <DataGrid.Resources>
+                                                    <ContextMenu x:Key="Menu">
+                                                        <ContextMenu.Items>
+                                                            <MenuItem Header="View in explorer"
+                                                                      Command="{StaticResource ViewInExplorerCommand}"
+                                                                      CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}"/>
+
+                                                        </ContextMenu.Items>
+                                                    </ContextMenu>
+                                                </DataGrid.Resources>
+                                                <DataGrid.RowStyle>
+                                                    <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                                                        <Setter Property="ContextMenu" Value="{StaticResource Menu}"></Setter>
+                                                    </Style>
+                                                </DataGrid.RowStyle>
                                                 <DataGrid.InputBindings>
                                                     <MouseBinding 
                                                         Gesture="LeftDoubleClick"
@@ -168,8 +207,8 @@
                                                             </DataTemplate>
                                                         </DataGridTemplateColumn.CellTemplate>
                                                     </DataGridTemplateColumn>
-                                                    <DataGridTextColumn Header="Total Size" Binding="{Binding TotalSpace}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
-                                                    <DataGridTextColumn Header="Free Space" Binding="{Binding FreeSpace}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Total Size" Binding="{Binding HumanReadSize}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Free Space" Binding="{Binding FreeSpaceHumanRead}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                     <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                 </DataGrid.Columns>
                                             </DataGrid>
@@ -181,6 +220,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate>
+                                            <!-- File Explorer -->
                                             <DataGrid 
                                                 x:Name="SpecialFilesExplorer"
                                                 ItemsSource="{Binding Path=FileDetailsCollection, Mode=TwoWay}" AutoGenerateColumns="False"
@@ -194,7 +234,22 @@
                                                 Height="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                AncestorType={x:Type Grid}},
                                                                Path=RowDefinitions[1].ActualHeight}"
+                                                IsReadOnly="True"
                                             >
+                                                <DataGrid.Resources>
+                                                    <ContextMenu x:Key="Menu">
+                                                        <ContextMenu.Items>
+                                                            <MenuItem Header="View in explorer"
+                                                                      Command="{StaticResource ViewInExplorerCommand}"
+                                                                      CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget}"/>
+                                                        </ContextMenu.Items>
+                                                    </ContextMenu>
+                                                </DataGrid.Resources>
+                                                <DataGrid.RowStyle>
+                                                    <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                                                        <Setter Property="ContextMenu" Value="{StaticResource Menu}"></Setter>
+                                                    </Style>
+                                                </DataGrid.RowStyle>
                                                 <DataGrid.InputBindings>
                                                     <MouseBinding 
                                                         Gesture="LeftDoubleClick"
@@ -212,7 +267,9 @@
                                                             </DataTemplate>
                                                         </DataGridTemplateColumn.CellTemplate>
                                                     </DataGridTemplateColumn>
-                                                    <DataGridTextColumn Header="Size" Binding="{Binding Size}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Size" SortMemberPath="Size" Binding="{Binding HumanReadSize}" IsReadOnly="True" Width="auto">
+                                                        
+                                                    </DataGridTextColumn>
                                                     <DataGridTextColumn Header="Files" Binding="{Binding FilesCount}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                     <DataGridTextColumn Header="Folders" Binding="{Binding FoldersCount}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                     <DataGridTextColumn Header="Date Modified" Binding="{Binding ModifiedAt}" IsReadOnly="True" Width="auto"></DataGridTextColumn>

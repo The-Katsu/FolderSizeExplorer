@@ -8,5 +8,6 @@
         public string Type { get; set; }
         public virtual bool IsSelected { get; set; }
         public virtual bool IsDirectory { get; set; }
+        public string HumanReadSize { get; set; } = string.Empty;
     }
 }

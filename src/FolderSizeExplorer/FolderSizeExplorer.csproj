@@ -85,11 +85,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
+    <Compile Include="Infrastructure\Commands\ChangeSizeUnitCommand.cs" />
     <Compile Include="Infrastructure\Commands\EmptyRecycleBinCommand.cs" />
     <Compile Include="Infrastructure\Commands\ExplorerDoubleClickCommand.cs" />
     <Compile Include="Infrastructure\Commands\ChangeDirectoryCommand.cs" />
     <Compile Include="Infrastructure\Commands\ExportToCsvCommand.cs" />
     <Compile Include="Infrastructure\Commands\UpdateExplorerCommand.cs" />
+    <Compile Include="Infrastructure\Commands\ViewInExplorerCommand.cs" />
     <Compile Include="Infrastructure\Events\HistoryChangeEvent.cs" />
     <Compile Include="Infrastructure\Events\EmptyArgsEvent.cs" />
     <Compile Include="Infrastructure\Events\ValueChangedEvent.cs" />
@@ -99,8 +101,10 @@
     <Compile Include="Models\SpecialFileDetails.cs" />
     <Compile Include="Services\BinService.cs" />
     <Compile Include="Services\CsvService.cs" />
+    <Compile Include="Services\Helpers\ExplorerService.cs" />
     <Compile Include="Services\Helpers\FileService.cs" />
     <Compile Include="Services\Helpers\FolderService.cs" />
+    <Compile Include="Services\Helpers\SizeUnitConverter.cs" />
     <Compile Include="Services\UI\FileDetailsService.cs" />
     <Compile Include="Services\UI\SpecialFileDetailsService.cs" />
     <Compile Include="Services\UI\TreeViewService.cs" />
