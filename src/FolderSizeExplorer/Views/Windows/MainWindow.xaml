@@ -158,6 +158,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate>
+                                            <!-- Special File Explorer -->
                                             <DataGrid 
                                                 x:Name="SpecialFilesExplorer"
                                                 ItemsSource="{Binding Path=SpecialFileDetailsCollection, Mode=TwoWay}" AutoGenerateColumns="False"
@@ -171,7 +172,22 @@
                                                       Height="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                AncestorType={x:Type Grid}},
                                                                Path=RowDefinitions[1].ActualHeight}"
+                                                IsReadOnly="True"
                                                       >
+                                                <DataGrid.Resources>
+                                                    <ContextMenu x:Key="Menu">
+                                                        <ContextMenu.Items>
+                                                            <MenuItem Header="View"/>
+                                                            <MenuItem Header="Edit"/>
+                                                            <MenuItem Header="Delete"/>
+                                                        </ContextMenu.Items>
+                                                    </ContextMenu>
+                                                </DataGrid.Resources>
+                                                <DataGrid.RowStyle>
+                                                    <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                                                        <Setter Property="ContextMenu" Value="{StaticResource Menu}"></Setter>
+                                                    </Style>
+                                                </DataGrid.RowStyle>
                                                 <DataGrid.InputBindings>
                                                     <MouseBinding 
                                                         Gesture="LeftDoubleClick"
@@ -202,6 +218,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate>
+                                            <!-- File Explorer -->
                                             <DataGrid 
                                                 x:Name="SpecialFilesExplorer"
                                                 ItemsSource="{Binding Path=FileDetailsCollection, Mode=TwoWay}" AutoGenerateColumns="False"
@@ -215,7 +232,22 @@
                                                 Height="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                AncestorType={x:Type Grid}},
                                                                Path=RowDefinitions[1].ActualHeight}"
+                                                IsReadOnly="True"
                                             >
+                                                <DataGrid.Resources>
+                                                    <ContextMenu x:Key="Menu">
+                                                        <ContextMenu.Items>
+                                                            <MenuItem Header="View"/>
+                                                            <MenuItem Header="Edit"/>
+                                                            <MenuItem Header="Delete"/>
+                                                        </ContextMenu.Items>
+                                                    </ContextMenu>
+                                                </DataGrid.Resources>
+                                                <DataGrid.RowStyle>
+                                                    <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                                                        <Setter Property="ContextMenu" Value="{StaticResource Menu}"></Setter>
+                                                    </Style>
+                                                </DataGrid.RowStyle>
                                                 <DataGrid.InputBindings>
                                                     <MouseBinding 
                                                         Gesture="LeftDoubleClick"
@@ -233,7 +265,9 @@
                                                             </DataTemplate>
                                                         </DataGridTemplateColumn.CellTemplate>
                                                     </DataGridTemplateColumn>
-                                                    <DataGridTextColumn Header="Size" Binding="{Binding HumanReadSize}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
+                                                    <DataGridTextColumn Header="Size" SortMemberPath="Size" Binding="{Binding HumanReadSize}" IsReadOnly="True" Width="auto">
+                                                        
+                                                    </DataGridTextColumn>
                                                     <DataGridTextColumn Header="Files" Binding="{Binding FilesCount}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                     <DataGridTextColumn Header="Folders" Binding="{Binding FoldersCount}" IsReadOnly="True" Width="auto"></DataGridTextColumn>
                                                     <DataGridTextColumn Header="Date Modified" Binding="{Binding ModifiedAt}" IsReadOnly="True" Width="auto"></DataGridTextColumn>

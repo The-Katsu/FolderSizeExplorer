@@ -50,5 +50,29 @@ namespace FolderSizeExplorer.Services.Helpers
 
             return size; 
         }
+
+        public static int GetFoldersCount(DirectoryInfo directoryInfo)
+        {
+            try
+            {
+                return directoryInfo.GetDirectories().Length;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+
+        public static int GetFilesCount(DirectoryInfo directoryInfo)
+        {
+            try
+            {
+                return directoryInfo.GetFiles().Length;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
     }
 }

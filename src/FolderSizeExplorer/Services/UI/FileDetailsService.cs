@@ -45,7 +45,9 @@ namespace FolderSizeExplorer.Services.UI
                         Path = directory.FullName,
                         Size = FolderService.CalculateSize(directory.FullName),
                         Type = directory.Extension == string.Empty ? "File folder" : directory.Extension,
-                        IsDirectory = true
+                        IsDirectory = true,
+                        FoldersCount = FolderService.GetFoldersCount(directory),
+                        FilesCount = FolderService.GetFilesCount(directory)
                     };
                     dir.HumanReadSize = SizeUnitConverter.ToHumanReadSize(dir.Size, unit);
                     if (token.IsCancellationRequested) break;
