@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using FolderSizeExplorer.Infrastructure.Events;
 using FolderSizeExplorer.Models;
 using FolderSizeExplorer.Services.Helpers;
 using FolderSizeExplorer.ViewModels;
+using File = FolderSizeExplorer.Models.Base.File;
 
 namespace FolderSizeExplorer.Services.UI
 {
@@ -20,7 +23,7 @@ namespace FolderSizeExplorer.Services.UI
         {
             _tokenSource.Cancel();
         }
-        public static void GetFiles(ObservableCollection<FileDetails> fileDetailsCollection, string path, string unit = "MB")
+        public static void GetFiles(ObservableCollection<FileDetails> fileDetailsCollection, string path, List<File> currentFiles, string unit = "MB")
         {
             _tokenSource = new CancellationTokenSource();
             var token = _tokenSource.Token;
@@ -52,6 +55,7 @@ namespace FolderSizeExplorer.Services.UI
                     dir.HumanReadSize = SizeUnitConverter.ToHumanReadSize(dir.Size, unit);
                     if (token.IsCancellationRequested) break;
                     Application.Current.Dispatcher.Invoke(() => fileDetailsCollection.Add(dir));
+                    currentFiles.Add(dir);
                     current++;
                     ProgressBarUpdate?.Invoke(null, new ValueChangedEvent<int>(100 * current / complete));
                 }
@@ -74,6 +78,7 @@ namespace FolderSizeExplorer.Services.UI
                     f.HumanReadSize = SizeUnitConverter.ToHumanReadSize(f.Size, unit);
                     if (token.IsCancellationRequested) break;
                     Application.Current.Dispatcher.Invoke(() => fileDetailsCollection.Add(f));
+                    currentFiles.Add(f);
                     current++;
                     ProgressBarUpdate?.Invoke(null, new ValueChangedEvent<int>(100 * current/complete));
                 }
