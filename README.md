@@ -16,6 +16,6 @@
 2. Click csv export button and select directory  
 ![alt text](https://sun9-71.userapi.com/impg/yg9mZgRHLpdm2XPlQnGOqsMv1Ar9HW8v89P7uQ/28hHg1diuwY.jpg?size=72x69&quality=96&sign=2d5294ed89f081c97463293d5c5b463e&type=album)
 3. Open it  
-![alt text](https://sun9-16.userapi.com/impg/VnSabu9RP5mGlsrZEuMicxviZ5NPW8MOK7aQbA/Q-YSYauZkEE.jpg?size=743x267&quality=96&sign=b2d83894d69012969c93feabd66eea75&type=album)
+![alt text](https://sun9-16.userapi.com/impg/VnSabu9RP5mGlsrZEuMicxviZ5NPW8MOK7aQbA/Q-YSYauZkEE.jpg?size=743x267&quality=96&sign=b2d83894d69012969c93feabd66eea75&type=album)  
 or use sheets  
 ![all text](https://sun9-82.userapi.com/impg/LgDskJr6wPGci_oWL39jmR0K2YXsVHHgcf34Cw/D6DkT5899-w.jpg?size=472x245&quality=96&sign=3c35690f39933f85ce59e3eeb566ca91&type=album)
