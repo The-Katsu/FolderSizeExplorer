@@ -41,7 +41,7 @@ namespace FolderSizeExplorer.Services
                     {
                         case FileDetails details:
                             text.AppendLine($"{details.Name}," +
-                                            $"{details.Size}," +
+                                            $"{details.HumanReadSize}," +
                                             $"{details.FilesCount}," +
                                             $"{details.FoldersCount}," +
                                             $"{details.ModifiedAt}," +
@@ -50,8 +50,8 @@ namespace FolderSizeExplorer.Services
                             break;
                         case SpecialFileDetails specialDetails:
                             text.AppendLine($"{specialDetails.Name}," +
-                                            $"{specialDetails.TotalSpace}," +
-                                            $"{specialDetails.FreeSpace}," +
+                                            $"{specialDetails.HumanReadSize}," +
+                                            $"{specialDetails.FreeSpaceHumanRead}," +
                                             $"{specialDetails.Type}");
                             break;
                     }
